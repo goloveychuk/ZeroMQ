@@ -1,0 +1,4 @@
+module ZeroMQ [system] {
+    header "zmq_swift.h"
+    export *
+}
