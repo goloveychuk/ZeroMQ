@@ -520,14 +520,14 @@ extension Socket {
     }
 
     public func getCURVESecretKey() throws -> String {
-        var value = [Int8](count: 42, repeatedValue: 0)
+        var value = [Int8](count: 41, repeatedValue: 0)
         var length = value.count
         try getOption(ZMQ_CURVE_SECRETKEY, value: &value, length: &length)
         return String.fromCString(Array(value[0 ..< length]))!
     }
 
     public func getCURVEServerKey() throws -> String {
-        var value = [Int8](count: 42, repeatedValue: 0)
+        var value = [Int8](count: 41, repeatedValue: 0)
         var length = value.count
         try getOption(ZMQ_CURVE_SERVERKEY, value: &value, length: &length)
         return String.fromCString(Array(value[0 ..< length]))!
