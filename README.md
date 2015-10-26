@@ -44,6 +44,14 @@ do {
 }
 ```
 
+## Dependency
+
+**SwiftZMQ** requires ZeroMQ version 4.2 to be installed. The easiest way on Mac OS X is through brew.
+
+```
+> brew install zeromq --HEAD
+```
+
 ## Installation
 
 ### Carthage
