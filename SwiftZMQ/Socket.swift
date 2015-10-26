@@ -53,7 +53,7 @@ public final class Socket {
     }
 
     deinit {
-        let _ = try? close()
+        zmq_close(socket)
     }
 
     func setOption(option: Int32, value: UnsafePointer<Void>, length: Int) throws {

@@ -100,7 +100,7 @@ public final class Context {
     }
 
     deinit {
-        let _ = try? terminate()
+        zmq_ctx_term(context)
     }
 
     public func terminate() throws {

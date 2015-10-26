@@ -60,7 +60,7 @@ public final class Message {
     }
 
     deinit {
-        let _ = try? close()
+        zmq_msg_close(&message)
     }
 
     func setProperty(property: Int32, value: Int32) {

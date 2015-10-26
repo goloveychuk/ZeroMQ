@@ -105,13 +105,13 @@
 			isa = PBXGroup;
 			children = (
 				B00EDA361BDDD1FB00BBBBAE /* Context.swift */,
-				B00EDA371BDDD1FB00BBBBAE /* CURVE.swift */,
-				B00EDA381BDDD1FB00BBBBAE /* Error.swift */,
-				B00EDA391BDDD1FB00BBBBAE /* Info.plist */,
+				B00EDA3D1BDDD1FB00BBBBAE /* Socket.swift */,
 				B00EDA3A1BDDD1FB00BBBBAE /* Message.swift */,
 				B00EDA3B1BDDD1FB00BBBBAE /* Poller.swift */,
 				B00EDA3C1BDDD1FB00BBBBAE /* Proxy.swift */,
-				B00EDA3D1BDDD1FB00BBBBAE /* Socket.swift */,
+				B00EDA381BDDD1FB00BBBBAE /* Error.swift */,
+				B00EDA371BDDD1FB00BBBBAE /* CURVE.swift */,
+				B00EDA391BDDD1FB00BBBBAE /* Info.plist */,
 			);
 			path = SwiftZMQ;
 			sourceTree = "<group>";
