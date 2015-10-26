@@ -46,10 +46,10 @@ do {
 
 ## Dependency
 
-**SwiftZMQ** requires ZeroMQ version 4.2 to be installed. The easiest way on Mac OS X is through brew.
+**SwiftZMQ** requires ØMQ version 4.2 to be installed. The easiest way on Mac OS X is through brew.
 
 ```
-> brew install zeromq --HEAD
+> brew install zeromq --with-libsodium --HEAD
 ```
 
 ## Installation
