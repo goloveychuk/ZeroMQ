@@ -8,7 +8,7 @@ SwiftZMQ
 [![Travis](https://img.shields.io/badge/Build-Passing-4BC51D.svg?style=flat)](https://travis-ci.org/Zewo/SwiftZMQ)
 [![codecov.io](http://codecov.io/github/Zewo/SwiftZMQ/coverage.svg?branch=master)](http://codecov.io/github/Zewo/SwiftZMQ?branch=master)
 
-**SwiftZMQ** is a [ZMQ](http://zeromq.org/) binding for **Swift 2**.
+**SwiftZMQ** is a [ZeroMQ](http://zeromq.org/) binding for **Swift 2**.
 
 ## Features
 
@@ -46,7 +46,7 @@ do {
 
 ## Dependency
 
-**SwiftZMQ** requires ØMQ version 4.2 to be installed. The easiest way on Mac OS X is through brew.
+**SwiftZMQ** requires ZeroMQ version 4.2 to be installed. The easiest way on Mac OS X is through brew.
 
 ```
 > brew install zeromq --with-libsodium --HEAD
