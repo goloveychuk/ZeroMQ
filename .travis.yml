@@ -13,6 +13,9 @@ env:
     - DESTINATION="arch=x86_64" SCHEME="SwiftZMQ OSX" SDK=macosx10.11
 before_install:
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+  - brew update
+install:
+  - brew install zeromq --HEAD
 script:
   - set -o pipefail
   - xcodebuild -version
