@@ -12,7 +12,7 @@ SwiftZMQ
 
 ## Features
 
-- [x] No `Foundation` depency (**Linux ready**)
+- [x] No `Foundation` dependency (**Linux ready**)
 - [x] Context
 - [x] Socket
 - [x] Message
