@@ -1,12 +1,13 @@
 SwiftZMQ
 ========
 
-[![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift 2.1](https://img.shields.io/badge/Swift-2.1-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Platforms OS X](https://img.shields.io/badge/Platforms-OS%20X-lightgray.svg?style=flat)](https://developer.apple.com/swift/)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-Compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://tldrlegal.com/license/mit-license)
 [![Travis](https://img.shields.io/badge/Build-Passing-4BC51D.svg?style=flat)](https://travis-ci.org/Zewo/SwiftZMQ)
 [![codecov.io](http://codecov.io/github/Zewo/SwiftZMQ/coverage.svg?branch=master)](http://codecov.io/github/Zewo/SwiftZMQ?branch=master)
+[![Slack Status](https://zewo-slackin.herokuapp.com/badge.svg)](https://zewo-slackin.herokuapp.com)
 
 **SwiftZMQ** is a [ZeroMQ](http://zeromq.org/) binding for **Swift 2**.
 
@@ -108,6 +109,12 @@ $ git submodule add https://github.com/Zewo/SwiftZMQ.git
 - And that's it!
 
 > The `SwiftZMQ.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
+
+## Community
+
+[![Slack](http://s13.postimg.org/ybwy92ktf/Slack.png)](https://zewo-slackin.herokuapp.com)
+
+Join us on [Slack](https://zewo-slackin.herokuapp.com).
 
 License
 -------
