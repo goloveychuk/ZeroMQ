@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B00ED9EB1BD8A2CD00BBBBAE /* SwiftZMQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00ED9E01BD8A2CD00BBBBAE /* SwiftZMQ.framework */; settings = {ASSET_TAGS = (); }; };
-		B00EDA421BDDD1FB00BBBBAE /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA361BDDD1FB00BBBBAE /* Context.swift */; settings = {ASSET_TAGS = (); }; };
-		B00EDA431BDDD1FB00BBBBAE /* CURVE.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA371BDDD1FB00BBBBAE /* CURVE.swift */; settings = {ASSET_TAGS = (); }; };
-		B00EDA441BDDD1FB00BBBBAE /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA381BDDD1FB00BBBBAE /* Error.swift */; settings = {ASSET_TAGS = (); }; };
-		B00EDA461BDDD1FB00BBBBAE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3A1BDDD1FB00BBBBAE /* Message.swift */; settings = {ASSET_TAGS = (); }; };
-		B00EDA471BDDD1FB00BBBBAE /* Poller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3B1BDDD1FB00BBBBAE /* Poller.swift */; settings = {ASSET_TAGS = (); }; };
-		B00EDA481BDDD1FB00BBBBAE /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3C1BDDD1FB00BBBBAE /* Proxy.swift */; settings = {ASSET_TAGS = (); }; };
-		B00EDA491BDDD1FB00BBBBAE /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3D1BDDD1FB00BBBBAE /* Socket.swift */; settings = {ASSET_TAGS = (); }; };
-		B00EDA4D1BDDD27000BBBBAE /* ZMQTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA411BDDD1FB00BBBBAE /* ZMQTests.swift */; settings = {ASSET_TAGS = (); }; };
+		B00ED9EB1BD8A2CD00BBBBAE /* SwiftZMQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00ED9E01BD8A2CD00BBBBAE /* SwiftZMQ.framework */; };
+		B00EDA421BDDD1FB00BBBBAE /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA361BDDD1FB00BBBBAE /* Context.swift */; };
+		B00EDA431BDDD1FB00BBBBAE /* CURVE.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA371BDDD1FB00BBBBAE /* CURVE.swift */; };
+		B00EDA441BDDD1FB00BBBBAE /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA381BDDD1FB00BBBBAE /* Error.swift */; };
+		B00EDA461BDDD1FB00BBBBAE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3A1BDDD1FB00BBBBAE /* Message.swift */; };
+		B00EDA471BDDD1FB00BBBBAE /* Poller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3B1BDDD1FB00BBBBAE /* Poller.swift */; };
+		B00EDA481BDDD1FB00BBBBAE /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3C1BDDD1FB00BBBBAE /* Proxy.swift */; };
+		B00EDA491BDDD1FB00BBBBAE /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3D1BDDD1FB00BBBBAE /* Socket.swift */; };
+		B00EDA4D1BDDD27000BBBBAE /* ZMQTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA411BDDD1FB00BBBBAE /* ZMQTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -354,6 +354,13 @@
 		B00ED9F51BD8A2CD00BBBBAE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+					armv7,
+					armv7s,
+					arm64,
+				);
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -377,14 +384,23 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.SwiftZMQ;
 				PRODUCT_NAME = SwiftZMQ;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
 		B00ED9F61BD8A2CD00BBBBAE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					i386,
+					x86_64,
+					armv7,
+					armv7s,
+					arm64,
+				);
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -408,7 +424,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.SwiftZMQ;
 				PRODUCT_NAME = SwiftZMQ;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
 			};
 			name = Release;
 		};
