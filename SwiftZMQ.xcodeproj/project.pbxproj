@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53C2A3BB1C4DE5B2008600D1 /* pull_compile_libzmq_git.sh in Resources */ = {isa = PBXBuildFile; fileRef = 53C2A3BA1C4DE5B2008600D1 /* pull_compile_libzmq_git.sh */; };
 		B00ED9EB1BD8A2CD00BBBBAE /* SwiftZMQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00ED9E01BD8A2CD00BBBBAE /* SwiftZMQ.framework */; };
 		B00EDA421BDDD1FB00BBBBAE /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA361BDDD1FB00BBBBAE /* Context.swift */; };
 		B00EDA431BDDD1FB00BBBBAE /* CURVE.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA371BDDD1FB00BBBBAE /* CURVE.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53C2A3BA1C4DE5B2008600D1 /* pull_compile_libzmq_git.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = pull_compile_libzmq_git.sh; sourceTree = "<group>"; };
 		B00ED9E01BD8A2CD00BBBBAE /* SwiftZMQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftZMQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00ED9EA1BD8A2CD00BBBBAE /* SwiftZMQTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftZMQTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00EDA021BD8A34B00BBBBAE /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
@@ -64,6 +66,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53C2A3B91C4DE5B2008600D1 /* libzmq */ = {
+			isa = PBXGroup;
+			children = (
+				53C2A3BA1C4DE5B2008600D1 /* pull_compile_libzmq_git.sh */,
+			);
+			name = libzmq;
+			path = dependencies/libzmq;
+			sourceTree = "<group>";
+		};
 		B00ED9D61BD8A2CD00BBBBAE = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +97,7 @@
 		B00ED9FA1BD8A2D900BBBBAE /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				53C2A3B91C4DE5B2008600D1 /* libzmq */,
 				B00EDA001BD8A34B00BBBBAE /* ZeroMQ */,
 			);
 			name = Dependencies;
@@ -215,6 +227,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53C2A3BB1C4DE5B2008600D1 /* pull_compile_libzmq_git.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
