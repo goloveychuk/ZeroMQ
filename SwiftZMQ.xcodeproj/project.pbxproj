@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		53C2A3BB1C4DE5B2008600D1 /* pull_compile_libzmq_git.sh in Resources */ = {isa = PBXBuildFile; fileRef = 53C2A3BA1C4DE5B2008600D1 /* pull_compile_libzmq_git.sh */; };
+		53C76A2C1C4EDFD500F0357B /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C76A291C4EDFD500F0357B /* libzmq.a */; };
+		53C76A2D1C4EDFD500F0357B /* zmq_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C76A2A1C4EDFD500F0357B /* zmq_utils.h */; };
+		53C76A2E1C4EDFD500F0357B /* zmq.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C76A2B1C4EDFD500F0357B /* zmq.h */; };
+		53C76A301C4EE1FE00F0357B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C76A2F1C4EE1FE00F0357B /* libc++.tbd */; };
 		B00ED9EB1BD8A2CD00BBBBAE /* SwiftZMQ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00ED9E01BD8A2CD00BBBBAE /* SwiftZMQ.framework */; };
 		B00EDA421BDDD1FB00BBBBAE /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA361BDDD1FB00BBBBAE /* Context.swift */; };
 		B00EDA431BDDD1FB00BBBBAE /* CURVE.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA371BDDD1FB00BBBBAE /* CURVE.swift */; };
@@ -31,6 +35,10 @@
 
 /* Begin PBXFileReference section */
 		53C2A3BA1C4DE5B2008600D1 /* pull_compile_libzmq_git.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = pull_compile_libzmq_git.sh; sourceTree = "<group>"; };
+		53C76A291C4EDFD500F0357B /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzmq.a; sourceTree = "<group>"; };
+		53C76A2A1C4EDFD500F0357B /* zmq_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zmq_utils.h; sourceTree = "<group>"; };
+		53C76A2B1C4EDFD500F0357B /* zmq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zmq.h; sourceTree = "<group>"; };
+		53C76A2F1C4EE1FE00F0357B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B00ED9E01BD8A2CD00BBBBAE /* SwiftZMQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftZMQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00ED9EA1BD8A2CD00BBBBAE /* SwiftZMQTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftZMQTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00EDA021BD8A34B00BBBBAE /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
@@ -52,6 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53C76A301C4EE1FE00F0357B /* libc++.tbd in Frameworks */,
+				53C76A2C1C4EDFD500F0357B /* libzmq.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +79,9 @@
 		53C2A3B91C4DE5B2008600D1 /* libzmq */ = {
 			isa = PBXGroup;
 			children = (
+				53C76A291C4EDFD500F0357B /* libzmq.a */,
+				53C76A2A1C4EDFD500F0357B /* zmq_utils.h */,
+				53C76A2B1C4EDFD500F0357B /* zmq.h */,
 				53C2A3BA1C4DE5B2008600D1 /* pull_compile_libzmq_git.sh */,
 			);
 			name = libzmq;
@@ -78,6 +91,7 @@
 		B00ED9D61BD8A2CD00BBBBAE = {
 			isa = PBXGroup;
 			children = (
+				53C76A2F1C4EE1FE00F0357B /* libc++.tbd */,
 				B00ED9FA1BD8A2D900BBBBAE /* Dependencies */,
 				B00EDA351BDDD1FA00BBBBAE /* SwiftZMQ */,
 				B00EDA3F1BDDD1FB00BBBBAE /* SwiftZMQTests */,
@@ -144,6 +158,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53C76A2D1C4EDFD500F0357B /* zmq_utils.h in Headers */,
+				53C76A2E1C4EDFD500F0357B /* zmq.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +170,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B00ED9F41BD8A2CD00BBBBAE /* Build configuration list for PBXNativeTarget "SwiftZMQ" */;
 			buildPhases = (
+				53C2A3BC1C4DE652008600D1 /* Run Script */,
 				B00ED9DB1BD8A2CD00BBBBAE /* Sources */,
 				B00ED9DC1BD8A2CD00BBBBAE /* Frameworks */,
 				B00ED9DD1BD8A2CD00BBBBAE /* Headers */,
@@ -193,7 +210,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Zewo;
 				TargetAttributes = {
 					B00ED9DF1BD8A2CD00BBBBAE = {
@@ -240,6 +257,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		53C2A3BC1C4DE652008600D1 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+				"${PROJECT_DIR}/dependencies/libzmq/build/universal/lib/libzmq.a",
+				"${PROJECT_DIR}/dependencies/libzmq/build/universal/include/zmq.h",
+				"${PROJECT_DIR}/dependencies/libzmq/build/universal/include/zmq_utils.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PROJECT_DIR}/dependencies/libzmq/pull_compile_libzmq_git.sh\n\ncp ${PROJECT_DIR}/dependencies/libzmq/build/universal/include/zmq.h ${PROJECT_DIR}/dependencies/libzmq/\ncp ${PROJECT_DIR}/dependencies/libzmq/build/universal/include/zmq_utils.h ${PROJECT_DIR}/dependencies/libzmq/\ncp ${PROJECT_DIR}/dependencies/libzmq/build/universal/lib/libzmq.a ${PROJECT_DIR}/dependencies/libzmq/\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B00ED9DB1BD8A2CD00BBBBAE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -278,6 +315,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = (
+					armv7,
+					armv7s,
+					arm64,
+					i386,
+					x86_64,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -317,7 +361,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lzmq";
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -327,6 +373,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = (
+					armv7,
+					armv7s,
+					arm64,
+					i386,
+					x86_64,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -359,6 +412,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-lzmq";
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -367,13 +422,7 @@
 		B00ED9F51BD8A2CD00BBBBAE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					x86_64,
-					armv7,
-					armv7s,
-					arm64,
-				);
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -388,6 +437,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Dependencies/ZeroMQ",
+					"$(PROJECT_DIR)/dependencies/libzmq",
 				);
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
@@ -396,6 +446,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.SwiftZMQ;
 				PRODUCT_NAME = SwiftZMQ;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
@@ -407,13 +458,7 @@
 		B00ED9F61BD8A2CD00BBBBAE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					i386,
-					x86_64,
-					armv7,
-					armv7s,
-					arm64,
-				);
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -428,6 +473,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Dependencies/ZeroMQ",
+					"$(PROJECT_DIR)/dependencies/libzmq",
 				);
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
@@ -436,6 +482,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.SwiftZMQ;
 				PRODUCT_NAME = SwiftZMQ;
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
@@ -449,6 +496,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SwiftZMQ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.SwiftZMQTests;
 				PRODUCT_NAME = SwiftZMQTests;
 			};
@@ -460,6 +508,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SwiftZMQ/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.SwiftZMQTests;
 				PRODUCT_NAME = SwiftZMQTests;
 			};

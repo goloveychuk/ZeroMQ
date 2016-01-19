@@ -194,6 +194,8 @@ rm -f Makefile
 rm -rf perf
 rm -rf src
 rm -rf tests
+rm -rf packaging
+rm -rf tools
 
 
 cat << EOF
