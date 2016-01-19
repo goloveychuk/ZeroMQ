@@ -37,6 +37,8 @@ public enum SocketType {
     case Pull
     case Pair
     case Stream
+    case Server
+    case Client
 }
 
 extension SocketType {
@@ -54,6 +56,9 @@ extension SocketType {
         case ZMQ_PULL:   self = Pull
         case ZMQ_PAIR:   self = Pair
         case ZMQ_STREAM: self = Stream
+        case ZMQ_SERVER: self = Server
+        case ZMQ_CLIENT: self = Client
+
         default:         return nil
         }
     }
