@@ -79,6 +79,8 @@ extension SocketType {
         case .Pull: return ZMQ_PULL
         case .Pair: return ZMQ_PAIR
         case .Stream: return ZMQ_STREAM
+        case .Server: return ZMQ_SERVER
+        case .Client: return ZMQ_CLIENT
         }
     }
 }
