@@ -20,6 +20,8 @@ SwiftZMQ
 - [x] Poller
 - [x] Proxy
 
+This fork clones the libzmq repo and compiles it statically into the SwiftZMQ framework, also it adds the iOS framework target
+
 ##Example
 
 ```swift
