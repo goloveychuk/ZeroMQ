@@ -25,3 +25,6 @@ xcuserdata
 *.xccheckout
 *.moved-aside
 *.xcuserstate
+.DS_Store
+libzmq/
+!libzmq/pull_compile_libzmq_git.sh
