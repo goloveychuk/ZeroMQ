@@ -342,7 +342,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PROJECT_DIR}/dependencies/libzmq/pull_compile_libzmq_git.sh\n\ncp ${PROJECT_DIR}/dependencies/libzmq/build/universal/include/zmq.h ${PROJECT_DIR}/dependencies/libzmq/\ncp ${PROJECT_DIR}/dependencies/libzmq/build/universal/include/zmq_utils.h ${PROJECT_DIR}/dependencies/libzmq/\ncp ${PROJECT_DIR}/dependencies/libzmq/build/universal/lib/libzmq.a ${PROJECT_DIR}/dependencies/libzmq/\n\n";
+			shellScript = "${PROJECT_DIR}/dependencies/libzmq/pull_compile_libzmq_git.sh\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
