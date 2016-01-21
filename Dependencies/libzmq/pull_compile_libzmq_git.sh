@@ -83,17 +83,12 @@ compile_zmq ()
 {
 make distclean
 
-cd "${LIBZMQ_DIR}" || exit
-
-${LIBZMQ_DIR}/autogen.sh
-
-cd "${DIR}" || exit
 
 
 "${LIBZMQ_DIR}/configure" --disable-dependency-tracking \
 --enable-static --disable-shared \
 --host=${HOST} \
---prefix="${BUILD_DIR}/${ARCH}" --without-libsodium
+--prefix="${BUILD_DIR}/${SDK}-${ARCH}" --without-libsodium
 
 make
 make install
@@ -108,9 +103,12 @@ echo "Cloning libzmq from source https://github.com/zeromq/libzmq.git"
 git clone "https://github.com/zeromq/libzmq.git" "${LIBZMQ_DIR}"
 
 
-echo "running autogen.sh"
 
-"${LIBZMQ_DIR}"/autogen.sh
+cd "${LIBZMQ_DIR}" || exit
+
+${LIBZMQ_DIR}/autogen.sh
+
+cd "${DIR}" || exit
 
 
 echo "Compiling libzmq for iphoneos/iphonesimulator"
@@ -167,6 +165,7 @@ compile_zmq
 
 echo "Creating fat static library for macosx"
 
+lipo_input=( )
 lipo_input+=("${BUILD_DIR}/macosx-i386/lib/${LIBZMQ_FILE}")
 lipo_input+=("${BUILD_DIR}/macosx-x86_64/lib/${LIBZMQ_FILE}")
 

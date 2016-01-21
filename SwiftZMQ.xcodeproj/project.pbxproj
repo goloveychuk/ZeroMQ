@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53045E9A1C50914D0037E4C1 /* libzmq-osx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53045E981C50914D0037E4C1 /* libzmq-osx.a */; };
+		53045E9B1C5091580037E4C1 /* libzmq-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53045E971C50914D0037E4C1 /* libzmq-ios.a */; };
 		539073F51C50484E00E8F9C6 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA361BDDD1FB00BBBBAE /* Context.swift */; };
 		539073F61C50484E00E8F9C6 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3D1BDDD1FB00BBBBAE /* Socket.swift */; };
 		539073F71C50484E00E8F9C6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3A1BDDD1FB00BBBBAE /* Message.swift */; };
@@ -15,10 +17,8 @@
 		539073FA1C50484E00E8F9C6 /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3C1BDDD1FB00BBBBAE /* Proxy.swift */; };
 		539073FB1C50484E00E8F9C6 /* Poller.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00EDA3B1BDDD1FB00BBBBAE /* Poller.swift */; };
 		539073FD1C50484E00E8F9C6 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C76A2F1C4EE1FE00F0357B /* libc++.tbd */; };
-		539073FE1C50484E00E8F9C6 /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C76A291C4EDFD500F0357B /* libzmq.a */; };
 		539074001C50484E00E8F9C6 /* zmq_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C76A2A1C4EDFD500F0357B /* zmq_utils.h */; };
 		539074011C50484E00E8F9C6 /* zmq.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C76A2B1C4EDFD500F0357B /* zmq.h */; };
-		53C76A2C1C4EDFD500F0357B /* libzmq.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C76A291C4EDFD500F0357B /* libzmq.a */; };
 		53C76A2D1C4EDFD500F0357B /* zmq_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C76A2A1C4EDFD500F0357B /* zmq_utils.h */; };
 		53C76A2E1C4EDFD500F0357B /* zmq.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C76A2B1C4EDFD500F0357B /* zmq.h */; };
 		53C76A301C4EE1FE00F0357B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C76A2F1C4EE1FE00F0357B /* libc++.tbd */; };
@@ -44,9 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		53045E971C50914D0037E4C1 /* libzmq-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzmq-ios.a"; path = "Dependencies/libzmq/libzmq-ios.a"; sourceTree = SOURCE_ROOT; };
+		53045E981C50914D0037E4C1 /* libzmq-osx.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libzmq-osx.a"; path = "Dependencies/libzmq/libzmq-osx.a"; sourceTree = SOURCE_ROOT; };
 		539074071C50484E00E8F9C6 /* SwiftZMQ_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftZMQ_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53C2A3BA1C4DE5B2008600D1 /* pull_compile_libzmq_git.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = pull_compile_libzmq_git.sh; sourceTree = "<group>"; };
-		53C76A291C4EDFD500F0357B /* libzmq.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzmq.a; sourceTree = "<group>"; };
 		53C76A2A1C4EDFD500F0357B /* zmq_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zmq_utils.h; sourceTree = "<group>"; };
 		53C76A2B1C4EDFD500F0357B /* zmq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zmq.h; sourceTree = "<group>"; };
 		53C76A2F1C4EE1FE00F0357B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -72,7 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				539073FD1C50484E00E8F9C6 /* libc++.tbd in Frameworks */,
-				539073FE1C50484E00E8F9C6 /* libzmq.a in Frameworks */,
+				53045E9B1C5091580037E4C1 /* libzmq-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +82,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53C76A301C4EE1FE00F0357B /* libc++.tbd in Frameworks */,
-				53C76A2C1C4EDFD500F0357B /* libzmq.a in Frameworks */,
+				53045E9A1C50914D0037E4C1 /* libzmq-osx.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +100,8 @@
 		53C2A3B91C4DE5B2008600D1 /* libzmq */ = {
 			isa = PBXGroup;
 			children = (
-				53C76A291C4EDFD500F0357B /* libzmq.a */,
+				53045E971C50914D0037E4C1 /* libzmq-ios.a */,
+				53045E981C50914D0037E4C1 /* libzmq-osx.a */,
 				53C76A2A1C4EDFD500F0357B /* zmq_utils.h */,
 				53C76A2B1C4EDFD500F0357B /* zmq.h */,
 				53C2A3BA1C4DE5B2008600D1 /* pull_compile_libzmq_git.sh */,
@@ -414,12 +416,10 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Dependencies/ZeroMQ",
 					"$(PROJECT_DIR)/dependencies/libzmq",
+					"$(PROJECT_DIR)/Dependencies/libzmq",
 				);
 				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-L/usr/local/lib",
-					"-lzmq",
-				);
+				OTHER_LDFLAGS = "-L/usr/local/lib ";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.SwiftZMQ-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -451,12 +451,10 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Dependencies/ZeroMQ",
 					"$(PROJECT_DIR)/dependencies/libzmq",
+					"$(PROJECT_DIR)/Dependencies/libzmq",
 				);
 				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-L/usr/local/lib",
-					"-lzmq",
-				);
+				OTHER_LDFLAGS = "-L/usr/local/lib ";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zewo.SwiftZMQ-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -506,7 +504,7 @@
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "-lzmq";
+				OTHER_LDFLAGS = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -548,7 +546,7 @@
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "-lzmq";
+				OTHER_LDFLAGS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -573,13 +571,11 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Dependencies/ZeroMQ",
 					"$(PROJECT_DIR)/dependencies/libzmq",
+					"$(PROJECT_DIR)/Dependencies/libzmq",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-L/usr/local/lib",
-					"-lzmq",
-				);
+				OTHER_LDFLAGS = "-L/usr/local/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.SwiftZMQ;
 				PRODUCT_NAME = SwiftZMQ;
 				SDKROOT = macosx;
@@ -608,13 +604,11 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Dependencies/ZeroMQ",
 					"$(PROJECT_DIR)/dependencies/libzmq",
+					"$(PROJECT_DIR)/Dependencies/libzmq",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = (
-					"-L/usr/local/lib",
-					"-lzmq",
-				);
+				OTHER_LDFLAGS = "-L/usr/local/lib";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.SwiftZMQ;
 				PRODUCT_NAME = SwiftZMQ;
 				SDKROOT = macosx;
