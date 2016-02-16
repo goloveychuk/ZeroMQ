@@ -22,7 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import ZeroMQ
+import CLibzmq
 
 public func CURVEKeyPair() throws -> (publicKey: String, secretKey: String) {
     var publicKey = [Int8](count: 41, repeatedValue: 0)

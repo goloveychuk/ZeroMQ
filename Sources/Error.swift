@@ -1,4 +1,4 @@
-// zmq_swift.swift
+// Error.swift
 //
 // The MIT License (MIT)
 //
@@ -22,9 +22,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef zmw_swift_h
-#define zmw_swift_h
+import CLibzmq
 
-#import <zmq.h>
+public struct Error : ErrorType, CustomStringConvertible {
+    public let description: String
 
-#endif /* zmw_swift_h */
+    static var lastError: Error {
+        let description = String.fromCString(zmq_strerror(zmq_errno()))!
+        return Error(description: description)
+    }
+}
