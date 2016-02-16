@@ -1,4 +1,4 @@
-// SwiftZMQ.h
+// Proxy.swift
 //
 // The MIT License (MIT)
 //
@@ -22,3 +22,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import CLibzmq
+
+public func proxy(frontend: Socket, backend: Socket, capture: Socket? = nil) {
+    zmq_proxy(frontend.socket, backend.socket, capture?.socket ?? nil)
+}
