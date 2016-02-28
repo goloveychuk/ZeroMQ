@@ -53,7 +53,7 @@
 		53C76A2F1C4EE1FE00F0357B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		B00ED9E01BD8A2CD00BBBBAE /* SwiftZMQ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftZMQ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00ED9EA1BD8A2CD00BBBBAE /* SwiftZMQTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftZMQTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B00EDA021BD8A34B00BBBBAE /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
+		B00EDA021BD8A34B00BBBBAE /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		B00EDA131BD9FE3C00BBBBAE /* zmq_swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zmq_swift.h; sourceTree = "<group>"; };
 		B00EDA361BDDD1FB00BBBBAE /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		B00EDA371BDDD1FB00BBBBAE /* CURVE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CURVE.swift; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 		B00EDA001BD8A34B00BBBBAE /* ZeroMQ */ = {
 			isa = PBXGroup;
 			children = (
-				B00EDA021BD8A34B00BBBBAE /* module.map */,
+				B00EDA021BD8A34B00BBBBAE /* module.modulemap */,
 				B00EDA131BD9FE3C00BBBBAE /* zmq_swift.h */,
 			);
 			name = ZeroMQ;
@@ -580,7 +580,7 @@
 				PRODUCT_NAME = SwiftZMQ;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies/**";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -613,7 +613,7 @@
 				PRODUCT_NAME = SwiftZMQ;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/Dependencies/**";
 			};
 			name = Release;
 		};
