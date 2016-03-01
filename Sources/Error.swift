@@ -1,4 +1,4 @@
-// CURVE.swift
+// Error.swift
 //
 // The MIT License (MIT)
 //
@@ -22,15 +22,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import ZeroMQ
+import CZeroMQ
 
-public func CURVEKeyPair() throws -> (publicKey: String, secretKey: String) {
-    var publicKey = [Int8](count: 41, repeatedValue: 0)
-    var secretKey = [Int8](count: 41, repeatedValue: 0)
+public struct Error : ErrorType, CustomStringConvertible {
+    public let description: String
 
-    if zmq_curve_keypair(&publicKey, &secretKey) == -1 {
-        throw Error.lastError
+    static var lastError: Error {
+        let description = String.fromCString(zmq_strerror(zmq_errno()))!
+        return Error(description: description)
     }
-
-    return (String.fromCString(publicKey)!, String.fromCString(secretKey)!)
 }
