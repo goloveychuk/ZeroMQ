@@ -137,7 +137,7 @@ public final class Socket {
         return message
     }
 
-    public func receive(bufferSize bufferSize: Int = 256, mode: ReceiveMode = []) throws -> [Int8]? {
+    public func receive(bufferSize bufferSize: Int = 1024, mode: ReceiveMode = []) throws -> [Int8]? {
         var buffer = [Int8](count: bufferSize, repeatedValue: 0)
         let result = zmq_recv(socket, &buffer, bufferSize, Int32(mode.rawValue))
 
@@ -439,9 +439,9 @@ extension Socket {
         try setOption(ZMQ_TCP_KEEPALIVE_INTVL, value: &value, length: strideof(Int32))
     }
 
-    public func setTCPRetransmitTimeout(var value: Int32) throws {
-        try setOption(ZMQ_TCP_RETRANSMIT_TIMEOUT, value: &value, length: strideof(Int32))
-    }
+//    public func setTCPRetransmitTimeout(var value: Int32) throws {
+//        try setOption(ZMQ_TCP_RETRANSMIT_TIMEOUT, value: &value, length: strideof(Int32))
+//    }
 
     public func setTypeOfService(var value: Int32) throws {
         try setOption(ZMQ_TOS, value: &value, length: strideof(Int32))
@@ -458,10 +458,10 @@ extension Socket {
         try setOption(ZMQ_XPUB_VERBOSE, value: &v, length: strideof(Int32))
     }
 
-    public func setXPubVerboseUnsubscribe(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_XPUB_VERBOSE_UNSUBSCRIBE, value: &v, length: strideof(Int32))
-    }
+//    public func setXPubVerboseUnsubscribe(value: Bool) throws {
+//        var v = value ? 1 : 0
+//        try setOption(ZMQ_XPUB_VERBOSE_UNSUBSCRIBE, value: &v, length: strideof(Int32))
+//    }
 
     public func setXPubManual(value: Bool) throws {
         var v = value ? 1 : 0
@@ -778,12 +778,12 @@ extension Socket {
         return value
     }
 
-    public func getTCPRetransmitTimeout() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_TCP_RETRANSMIT_TIMEOUT, value: &value, length: &length)
-        return value
-    }
+//    public func getTCPRetransmitTimeout() throws -> Int32 {
+//        var value: Int32 = 0
+//        var length = strideof(Int32)
+//        try getOption(ZMQ_TCP_RETRANSMIT_TIMEOUT, value: &value, length: &length)
+//        return value
+//    }
 
     public func getThreadSafe() throws -> Bool {
         var value: Int32 = 0
