@@ -115,8 +115,8 @@
 			children = (
 				53C76A2F1C4EE1FE00F0357B /* libc++.tbd */,
 				B00ED9FA1BD8A2D900BBBBAE /* Dependencies */,
-				B00EDA351BDDD1FA00BBBBAE /* SwiftZMQ */,
-				B00EDA3F1BDDD1FB00BBBBAE /* SwiftZMQTests */,
+				B00EDA351BDDD1FA00BBBBAE /* Sources */,
+				B00EDA3F1BDDD1FB00BBBBAE /* Tests */,
 				B00ED9E11BD8A2CD00BBBBAE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -150,7 +150,7 @@
 			path = Dependencies/zeromq;
 			sourceTree = "<group>";
 		};
-		B00EDA351BDDD1FA00BBBBAE /* SwiftZMQ */ = {
+		B00EDA351BDDD1FA00BBBBAE /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				B00EDA361BDDD1FB00BBBBAE /* Context.swift */,
@@ -162,16 +162,16 @@
 				B00EDA371BDDD1FB00BBBBAE /* CURVE.swift */,
 				B00EDA391BDDD1FB00BBBBAE /* Info.plist */,
 			);
-			path = SwiftZMQ;
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		B00EDA3F1BDDD1FB00BBBBAE /* SwiftZMQTests */ = {
+		B00EDA3F1BDDD1FB00BBBBAE /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				B00EDA401BDDD1FB00BBBBAE /* Info.plist */,
 				B00EDA411BDDD1FB00BBBBAE /* ZMQTests.swift */,
 			);
-			path = SwiftZMQTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -407,7 +407,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = SwiftZMQ/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
@@ -442,7 +442,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = SwiftZMQ/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
@@ -563,7 +563,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = SwiftZMQ/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -596,7 +596,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = SwiftZMQ/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -621,7 +621,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SwiftZMQ/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.SwiftZMQTests;
@@ -633,7 +633,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SwiftZMQ/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zewo.SwiftZMQTests;

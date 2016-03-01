@@ -22,7 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import ZeroMQ
+import CZeroMQ
 
 public struct SendMode : OptionSetType {
     public let rawValue: Int
@@ -188,11 +188,13 @@ public struct SocketEvent : OptionSetType {
 }
 
 extension Socket {
-    public func setAffinity(var value: UInt64) throws {
+    public func setAffinity(value: UInt64) throws {
+        var value = value
         try setOption(ZMQ_AFFINITY, value: &value, length: strideof(UInt64))
     }
 
-    public func setBacklog(var value: Int32) throws {
+    public func setBacklog(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_BACKLOG, value: &value, length: strideof(Int32))
     }
 
@@ -207,7 +209,8 @@ extension Socket {
         try setOption(ZMQ_CONFLATE, value: &v, length: strideof(Int32))
     }
 
-    public func setConnectTimeout(var value: Int32) throws {
+    public func setConnectTimeout(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_CONNECT_TIMEOUT, value: &value, length: strideof(Int32))
     }
 
@@ -268,19 +271,23 @@ extension Socket {
         }
     }
 
-    public func setHandshakeInterval(var value: Int32) throws {
+    public func setHandshakeInterval(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_HANDSHAKE_IVL, value: &value, length: strideof(Int32))
     }
 
-    public func setHeartbeatInterval(var value: Int32) throws {
+    public func setHeartbeatInterval(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_HEARTBEAT_IVL, value: &value, length: strideof(Int32))
     }
 
-    public func setHeartbeatTimeout(var value: Int32) throws {
+    public func setHeartbeatTimeout(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_HEARTBEAT_TIMEOUT, value: &value, length: strideof(Int32))
     }
 
-    public func setHeartbeatTTTL(var value: Int32) throws {
+    public func setHeartbeatTTTL(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_HEARTBEAT_TTL, value: &value, length: strideof(Int32))
     }
 
@@ -291,29 +298,32 @@ extension Socket {
     }
 
     public func setImmediate(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_IMMEDIATE, value: &v, length: strideof(Int32))
+        var value = value ? 1 : 0
+        try setOption(ZMQ_IMMEDIATE, value: &value, length: strideof(Int32))
     }
 
     public func setInvertMatching(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_INVERT_MATCHING, value: &v, length: strideof(Int32))
+        var value = value ? 1 : 0
+        try setOption(ZMQ_INVERT_MATCHING, value: &value, length: strideof(Int32))
     }
 
     public func setIPV6(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_IPV6, value: &v, length: strideof(Int32))
+        var value = value ? 1 : 0
+        try setOption(ZMQ_IPV6, value: &value, length: strideof(Int32))
     }
 
-    public func setLinger(var value: Int32) throws {
+    public func setLinger(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_LINGER, value: &value, length: strideof(Int32))
     }
 
-    public func setMaxMessageSize(var value: Int64) throws {
+    public func setMaxMessageSize(value: Int64) throws {
+        var value = value
         try setOption(ZMQ_MAXMSGSIZE, value: &value, length: strideof(Int64))
     }
 
-    public func setMulticastHops(var value: Int32) throws {
+    public func setMulticastHops(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_MULTICAST_HOPS, value: &value, length: strideof(Int32))
     }
 
@@ -343,78 +353,88 @@ extension Socket {
     }
 
     public func setProbeRouter(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_PROBE_ROUTER, value: &v, length: strideof(Int32))
+        var value = value ? 1 : 0
+        try setOption(ZMQ_PROBE_ROUTER, value: &value, length: strideof(Int32))
     }
 
-    public func setRate(var value: Int32) throws {
+    public func setRate(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_RATE, value: &value, length: strideof(Int32))
     }
 
-    public func setReceiveBuffer(var value: Int32) throws {
+    public func setReceiveBuffer(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_RCVBUF, value: &value, length: strideof(Int32))
     }
 
-    public func setReceiveHighWaterMark(var value: Int32) throws {
+    public func setReceiveHighWaterMark(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_RCVHWM, value: &value, length: strideof(Int32))
     }
 
-    public func setReceiveTimeout(var value: Int32) throws {
+    public func setReceiveTimeout(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_RCVTIMEO, value: &value, length: strideof(Int32))
     }
 
-    public func setReconnectInterval(var value: Int32) throws {
+    public func setReconnectInterval(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_RECONNECT_IVL, value: &value, length: strideof(Int32))
     }
 
-    public func setReconnectIntervalMax(var value: Int32) throws {
+    public func setReconnectIntervalMax(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_RECONNECT_IVL_MAX, value: &value, length: strideof(Int32))
     }
 
-    public func setRecoveryInterval(var value: Int32) throws {
+    public func setRecoveryInterval(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_RECOVERY_IVL, value: &value, length: strideof(Int32))
     }
 
     public func setReqCorrelate(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_REQ_CORRELATE, value: &v, length: strideof(Int32))
+        var value = value ? 1 : 0
+        try setOption(ZMQ_REQ_CORRELATE, value: &value, length: strideof(Int32))
     }
 
     public func setReqRelaxed(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_REQ_RELAXED, value: &v, length: strideof(Int32))
+        var value = value ? 1 : 0
+        try setOption(ZMQ_REQ_RELAXED, value: &value, length: strideof(Int32))
     }
 
     public func setRouterHandover(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_ROUTER_HANDOVER, value: &v, length: strideof(Int32))
+        var value = value ? 1 : 0
+        try setOption(ZMQ_ROUTER_HANDOVER, value: &value, length: strideof(Int32))
     }
 
     public func setRouterMandatory(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_ROUTER_MANDATORY, value: &v, length: strideof(Int32))
+        var value = value ? 1 : 0
+        try setOption(ZMQ_ROUTER_MANDATORY, value: &value, length: strideof(Int32))
     }
 
     public func setRouterRaw(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_ROUTER_RAW, value: &v, length: strideof(Int32))
+        var value = value ? 1 : 0
+        try setOption(ZMQ_ROUTER_RAW, value: &value, length: strideof(Int32))
     }
 
-    public func setSendBuffer(var value: Int32) throws {
+    public func setSendBuffer(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_SNDBUF, value: &value, length: strideof(Int32))
     }
 
-    public func setSendHighWaterMark(var value: Int32) throws {
+    public func setSendHighWaterMark(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_SNDHWM, value: &value, length: strideof(Int32))
     }
 
-    public func setSendTimeout(var value: Int32) throws {
+    public func setSendTimeout(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_SNDTIMEO, value: &value, length: strideof(Int32))
     }
 
     public func setStreamNotify(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_STREAM_NOTIFY, value: &v, length: strideof(Int32))
+        var value = value ? 1 : 0
+        try setOption(ZMQ_STREAM_NOTIFY, value: &value, length: strideof(Int32))
     }
 
     public func setSubscribe(value: String) throws {
@@ -423,19 +443,23 @@ extension Socket {
         }
     }
 
-    public func setTCPKeepAlive(var value: Int32) throws {
+    public func setTCPKeepAlive(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_TCP_KEEPALIVE, value: &value, length: strideof(Int32))
     }
 
-    public func setTCPKeepAliveCount(var value: Int32) throws {
+    public func setTCPKeepAliveCount(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_TCP_KEEPALIVE_CNT, value: &value, length: strideof(Int32))
     }
 
-    public func setTCPKeepAliveIdle(var value: Int32) throws {
+    public func setTCPKeepAliveIdle(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_TCP_KEEPALIVE_IDLE, value: &value, length: strideof(Int32))
     }
 
-    public func setTCPKeepAliveInterval(var value: Int32) throws {
+    public func setTCPKeepAliveInterval(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_TCP_KEEPALIVE_INTVL, value: &value, length: strideof(Int32))
     }
 
@@ -443,7 +467,8 @@ extension Socket {
 //        try setOption(ZMQ_TCP_RETRANSMIT_TIMEOUT, value: &value, length: strideof(Int32))
 //    }
 
-    public func setTypeOfService(var value: Int32) throws {
+    public func setTypeOfService(value: Int32) throws {
+        var value = value
         try setOption(ZMQ_TOS, value: &value, length: strideof(Int32))
     }
 
@@ -832,7 +857,8 @@ extension SecurityMechanism {
 }
 
 extension Socket {
-    public func send(var buffer: [Int8], mode: SendMode = []) throws -> Bool {
+    public func send(buffer: [Int8], mode: SendMode = []) throws -> Bool {
+        var buffer = buffer
         return try send(&buffer, length: buffer.count, mode: mode)
     }
 
