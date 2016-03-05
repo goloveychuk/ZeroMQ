@@ -561,7 +561,7 @@ extension Socket {
     public func getEvents() throws -> PollEvent? {
         var value: Int32 = 0
         var length = strideof(Int32)
-        try getOption(ZMQ_TCP_KEEPALIVE, value: &value, length: &length)
+        try getOption(ZMQ_EVENTS, value: &value, length: &length)
         return Int(value) == -1 ? nil : PollEvent(rawValue: Int16(value))
     }
 
