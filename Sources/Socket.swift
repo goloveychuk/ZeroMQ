@@ -23,6 +23,7 @@
 // SOFTWARE.
 
 import CZeroMQ
+import Data
 
 public struct SendMode : OptionSetType {
     public let rawValue: Int
@@ -107,6 +108,10 @@ public final class Socket {
 
         return true
     }
+    public func send(data: Data, mode: SendMode = []) throws -> Bool {
+        var data = data
+        return try self.send(&data.bytes, length: data.count, mode: mode)
+    }
 
     func sendImmutable(buffer: UnsafePointer<Void>, length: Int, mode: SendMode = []) throws -> Bool {
         let result = zmq_send_const(socket, buffer, length, Int32(mode.rawValue))
@@ -137,10 +142,9 @@ public final class Socket {
         return message
     }
 
-    public func receive(bufferSize bufferSize: Int = 1024, mode: ReceiveMode = []) throws -> [Int8]? {
-        var buffer = [Int8](count: bufferSize, repeatedValue: 0)
-        let result = zmq_recv(socket, &buffer, bufferSize, Int32(mode.rawValue))
-
+    public func receive(bufferSize bufferSize: Int = 1024, mode: ReceiveMode = []) throws -> Data? {
+        var data = Data.bufferWithSize(bufferSize)
+        let result = zmq_recv(socket, &data.bytes, bufferSize, Int32(mode.rawValue))
         if result == -1 && zmq_errno() == EAGAIN {
             return nil
         }
@@ -148,9 +152,8 @@ public final class Socket {
         if result == -1 {
             throw Error.lastError
         }
-
         let bufferEnd = min(Int(result), bufferSize)
-        return Array(buffer[0 ..< bufferEnd])
+        return data[0 ..< bufferEnd]
     }
     
     public func close() throws {
@@ -857,21 +860,14 @@ extension SecurityMechanism {
 }
 
 extension Socket {
-    public func send(buffer: [Int8], mode: SendMode = []) throws -> Bool {
-        var buffer = buffer
-        return try send(&buffer, length: buffer.count, mode: mode)
-    }
-
     public func sendString(string: String, mode: SendMode = []) throws -> Bool {
-        var buffer = string.utf8.map { Int8($0) }
-        return try send(&buffer, length: buffer.count, mode: mode)
+        return try send(Data(string), mode: mode)
     }
 
     public func receiveString(mode: ReceiveMode = []) throws -> String? {
-        guard var buffer = try receive(mode: mode) else {
+        guard let buffer = try receive(mode: mode) else {
             return nil
         }
-        buffer.append(0)
-        return String.fromCString(buffer)
+        return try? String(data: buffer)
     }
 }
