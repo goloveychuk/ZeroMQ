@@ -22,9 +22,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CZeroMQ
+import CLibzmq
 
-public struct PollEvent : OptionSetType {
+public struct PollEvent : OptionSet {
     public let rawValue: Int16
 
     public init(rawValue: Int16) {

@@ -1,4 +1,4 @@
-// CURVE.swift
+// Proxy.swift
 //
 // The MIT License (MIT)
 //
@@ -22,15 +22,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CZeroMQ
+import CLibzmq
 
-public func CURVEKeyPair() throws -> (publicKey: String, secretKey: String) {
-    var publicKey = [Int8](count: 41, repeatedValue: 0)
-    var secretKey = [Int8](count: 41, repeatedValue: 0)
-
-    if zmq_curve_keypair(&publicKey, &secretKey) == -1 {
-        throw Error.lastError
-    }
-
-    return (String.fromCString(publicKey)!, String.fromCString(secretKey)!)
+public func proxy(frontend: Socket, backend: Socket, capture: Socket? = nil) {
+    zmq_proxy(frontend.socket, backend.socket, capture?.socket ?? nil)
 }

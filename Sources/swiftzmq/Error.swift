@@ -1,4 +1,4 @@
-// Proxy.swift
+// Error.swift
 //
 // The MIT License (MIT)
 //
@@ -22,8 +22,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CZeroMQ
+import CLibzmq
 
-public func proxy(frontend: Socket, backend: Socket, capture: Socket? = nil) {
-    zmq_proxy(frontend.socket, backend.socket, capture?.socket ?? nil)
+public struct Error : ErrorProtocol, CustomStringConvertible {
+    public let description: String
+
+    static var lastError: Error {
+        let description = String(validatingUTF8: zmq_strerror(zmq_errno()))!
+        return Error(description: description)
+    }
 }

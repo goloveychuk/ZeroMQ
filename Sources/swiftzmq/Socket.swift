@@ -22,10 +22,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CZeroMQ
+import CLibzmq
 import Data
 
-public struct SendMode : OptionSetType {
+public struct SendMode : OptionSet {
     public let rawValue: Int
 
     public init(rawValue: Int) {
@@ -36,7 +36,7 @@ public struct SendMode : OptionSetType {
     public static let SendMore = SendMode(rawValue: Int(ZMQ_SNDMORE))
 }
 
-public struct ReceiveMode : OptionSetType {
+public struct ReceiveMode : OptionSet {
     public let rawValue: Int
 
     public init(rawValue: Int) {
@@ -169,7 +169,7 @@ public final class Socket {
     }
 }
 
-public struct SocketEvent : OptionSetType {
+public struct SocketEvent : OptionSet {
     public let rawValue: Int32
 
     public init(rawValue: Int32) {
@@ -541,24 +541,24 @@ extension Socket {
     }
 
     public func getCURVEPublicKey() throws -> String {
-        var value = [Int8](count: 41, repeatedValue: 0)
+        var value = [Int8](repeating: 0, count: 41)
         var length = value.count
         try getOption(ZMQ_CURVE_PUBLICKEY, value: &value, length: &length)
-        return String.fromCString(Array(value[0 ..< length]))!
+        return String(validatingUTF8: Array(value[0 ..< length]))!
     }
 
     public func getCURVESecretKey() throws -> String {
-        var value = [Int8](count: 41, repeatedValue: 0)
+        var value = [Int8](repeating: 0, count: 41)
         var length = value.count
         try getOption(ZMQ_CURVE_SECRETKEY, value: &value, length: &length)
-        return String.fromCString(Array(value[0 ..< length]))!
+        return String(validatingUTF8: Array(value[0 ..< length]))!
     }
 
     public func getCURVEServerKey() throws -> String {
-        var value = [Int8](count: 41, repeatedValue: 0)
+        var value = [Int8](repeating: 0, count: 41)
         var length = value.count
         try getOption(ZMQ_CURVE_SERVERKEY, value: &value, length: &length)
-        return String.fromCString(Array(value[0 ..< length]))!
+        return String(validatingUTF8: Array(value[0 ..< length]))!
     }
 
     public func getEvents() throws -> PollEvent? {
@@ -583,10 +583,10 @@ extension Socket {
     }
 
     public func getGSSAPIPrincipal() throws -> String {
-        var value = [Int8](count: 256, repeatedValue: 0)
+        var value = [Int8](repeating: 0, count: 256)
         var length = value.count
         try getOption(ZMQ_GSSAPI_PRINCIPAL, value: &value, length: &length)
-        return String.fromCString(Array(value[0 ..< length]))!
+        return String(validatingUTF8: Array(value[0 ..< length]))!
     }
 
     public func getGSSAPIServer() throws -> Bool {
@@ -597,10 +597,10 @@ extension Socket {
     }
 
     public func getGSSAPIServicePrincipal() throws -> String {
-        var value = [Int8](count: 256, repeatedValue: 0)
+        var value = [Int8](repeating: 0, count: 256)
         var length = value.count
         try getOption(ZMQ_GSSAPI_SERVICE_PRINCIPAL, value: &value, length: &length)
-        return String.fromCString(Array(value[0 ..< length]))!
+        return String(validatingUTF8: Array(value[0 ..< length]))!
     }
 
     public func getHandshakeInterval() throws -> Int32 {
@@ -611,10 +611,10 @@ extension Socket {
     }
 
     public func getIdentity() throws -> String {
-        var value = [Int8](count: 256, repeatedValue: 0)
+        var value = [Int8](repeating: 0, count: 256)
         var length = value.count
         try getOption(ZMQ_IDENTITY, value: &value, length: &length)
-        return String.fromCString(Array(value[0 ..< length])) ?? ""
+        return String(validatingUTF8: Array(value[0 ..< length])) ?? ""
     }
 
     public func getImmediate() throws -> Bool {
@@ -646,10 +646,10 @@ extension Socket {
     }
 
     public func getLastEndpoint() throws -> String {
-        var value = [Int8](count: 256, repeatedValue: 0)
+        var value = [Int8](repeating: 0, count: 256)
         var length = value.count
         try getOption(ZMQ_LAST_ENDPOINT, value: &value, length: &length)
-        return String.fromCString(Array(value[0 ..< length]))!
+        return String(validatingUTF8: Array(value[0 ..< length]))!
     }
 
     public func getLinger() throws -> Int32 {
@@ -681,10 +681,10 @@ extension Socket {
     }
 
     public func getPlainPassword() throws -> String {
-        var value = [Int8](count: 256, repeatedValue: 0)
+        var value = [Int8](repeating: 0, count: 256)
         var length = value.count
         try getOption(ZMQ_PLAIN_PASSWORD, value: &value, length: &length)
-        return String.fromCString(Array(value[0 ..< length]))!
+        return String(validatingUTF8: Array(value[0 ..< length]))!
     }
 
     public func getPlainServer() throws -> Bool {
@@ -695,10 +695,10 @@ extension Socket {
     }
 
     public func getPlainUsername() throws -> String {
-        var value = [Int8](count: 256, repeatedValue: 0)
+        var value = [Int8](repeating: 0, count: 256)
         var length = value.count
         try getOption(ZMQ_PLAIN_USERNAME, value: &value, length: &length)
-        return String.fromCString(Array(value[0 ..< length]))!
+        return String(validatingUTF8: Array(value[0 ..< length]))!
     }
 
     public func getRate() throws -> Int32 {
@@ -835,10 +835,10 @@ extension Socket {
     }
 
     public func getZAPDomain() throws -> String {
-        var value = [Int8](count: 256, repeatedValue: 0)
+        var value = [Int8](repeating: 0, count: 256)
         var length = value.count
         try getOption(ZMQ_ZAP_DOMAIN, value: &value, length: &length)
-        return String.fromCString(Array(value[0 ..< length]))!
+        return String(validatingUTF8: Array(value[0 ..< length]))!
     }
 }
 

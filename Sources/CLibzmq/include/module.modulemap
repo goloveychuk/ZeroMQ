@@ -1,0 +1,5 @@
+module CLibzmq {
+    header "/usr/local/include/zmq.h"
+    link "zmq"
+    export *
+}
