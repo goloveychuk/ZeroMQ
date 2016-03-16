@@ -1,5 +1,5 @@
-module CLibzmq {
+module CZeroMQ {
     header "/usr/local/include/zmq.h"
-    link "zmq"
+    link "CZeroMQ"
     export *
 }

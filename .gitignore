@@ -28,3 +28,5 @@ xcuserdata
 .DS_Store
 libzmq/
 !libzmq/pull_compile_libzmq_git.sh
+.build
+.xcodeproj

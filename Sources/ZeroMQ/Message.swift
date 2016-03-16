@@ -22,7 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import CLibzmq
+import CZeroMQ
 
 public final class Message {
     var message: zmq_msg_t
