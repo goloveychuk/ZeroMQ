@@ -24,7 +24,7 @@
 
 import CZeroMQ
 
-public struct PollEvent : OptionSetType {
+public struct PollEvent : OptionSet {
     public let rawValue: Int16
 
     public init(rawValue: Int16) {

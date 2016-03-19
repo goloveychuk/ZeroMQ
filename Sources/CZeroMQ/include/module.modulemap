@@ -1,0 +1,5 @@
+module CZeroMQ {
+    header "/usr/local/include/zmq.h"
+    link "CZeroMQ"
+    export *
+}

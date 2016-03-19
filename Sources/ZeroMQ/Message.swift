@@ -78,7 +78,7 @@ public final class Message {
             throw Error.lastError
         }
 
-        return String.fromCString(result)!
+        return String(validatingUTF8: result)!
     }
 
     public func close() throws {
@@ -109,7 +109,7 @@ public final class Message {
         return message
     }
 
-    public func move(inout message: Message) throws {
+    public func move(message: inout Message) throws {
         let message = try Message()
 
         if zmq_msg_move(&message.message, &self.message) == -1 {
