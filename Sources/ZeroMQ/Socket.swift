@@ -153,9 +153,9 @@ public final class Socket {
             throw Error.lastError
         }
         let bufferEnd = min(Int(result), bufferSize)
-        return data[0 ..< bufferEnd]
+        return Data(data[0 ..< bufferEnd])
     }
-    
+
     public func close() throws {
         if zmq_close(socket) == -1 {
             throw Error.lastError
