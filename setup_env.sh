@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-if [ "$(uname)" == "Darwin" ]; then
+if [[ "$(uname)" == "Darwin" ]]; then
 	brew update
 	brew install zeromq --with-libsodium
 else
