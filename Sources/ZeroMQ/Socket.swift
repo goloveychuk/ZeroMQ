@@ -191,133 +191,121 @@ public struct SocketEvent : OptionSet {
 }
 
 extension Socket {
+    func setOption(option: Int32, _ value: Bool) throws {
+        var value = value ? 1 : 0
+        try setOption(option, value: &value, length: strideof(Int32))
+    }
+    func setOption(option: Int32, _ value: Int32) throws {
+        var value = value
+        try setOption(option, value: &value, length: strideof(Int32))
+    }
+    func setOption(option: Int32, _ value: String) throws {
+        try value.withCString { v in
+            try setOption(option, value: v, length: value.utf8.count)
+        }
+    }
+    func setOption(option: Int32, _ value: Data) throws {
+        try setOption(option, value: value.bytes, length: value.count)
+    }
+    func setOption(option: Int32, _ value: String?) throws {
+        if let value = value {
+            try value.withCString { v in
+                try setOption(option, value: v, length: value.utf8.count)
+            }
+        } else {
+            try setOption(option, value: nil, length: 0)
+        }
+    }
+}
+
+extension Socket {
     public func setAffinity(value: UInt64) throws {
         var value = value
         try setOption(ZMQ_AFFINITY, value: &value, length: strideof(UInt64))
     }
 
     public func setBacklog(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_BACKLOG, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_BACKLOG, value)
     }
 
     public func setConnectRID(value: String) throws {
-        try value.withCString { v in
-            try setOption(ZMQ_CONNECT_RID, value: v, length: value.utf8.count)
-        }
+        try setOption(ZMQ_CONNECT_RID, value)
     }
 
     public func setConflate(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_CONFLATE, value: &v, length: strideof(Int32))
+        try setOption(ZMQ_CONFLATE, value)
     }
 
-    public func setConnectTimeout(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_CONNECT_TIMEOUT, value: &value, length: strideof(Int32))
-    }
+    // public func setConnectTimeout(value: Int32) throws {
+    //     try setOption(ZMQ_CONNECT_TIMEOUT, value)
+    // }
 
-    public func setCURVEPublicKey(value: String?) throws {
-        if let value = value {
-            try value.withCString { v in
-                try setOption(ZMQ_CURVE_PUBLICKEY, value: v, length: value.utf8.count)
-            }
-        } else {
-            try setOption(ZMQ_CURVE_PUBLICKEY, value: nil, length: 0)
-        }
+    public func setCURVEPublicKey(value: String?) throws {        
+        try setOption(ZMQ_CURVE_PUBLICKEY, value)
     }
 
     public func setCURVESecretKey(value: String?) throws {
-        if let value = value {
-            try value.withCString { v in
-                try setOption(ZMQ_CURVE_SECRETKEY, value: v, length: value.utf8.count)
-            }
-        } else {
-            try setOption(ZMQ_CURVE_SECRETKEY, value: nil, length: 0)
-        }
+        try setOption(ZMQ_CURVE_SECRETKEY, value)
     }
 
     public func setCURVEServer(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_CURVE_SERVER, value: &v, length: strideof(Int32))
+        try setOption(ZMQ_CURVE_SERVER, value)
     }
 
     public func setCURVEServerKey(value: String?) throws {
-        if let value = value {
-            try value.withCString { v in
-                try setOption(ZMQ_CURVE_SERVERKEY, value: v, length: value.utf8.count)
-            }
-        } else {
-            try setOption(ZMQ_CURVE_SERVERKEY, value: nil, length: 0)
-        }
+        try setOption(ZMQ_CURVE_SERVERKEY, value)
     }
 
     public func setGSSAPIPlainText(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_GSSAPI_PLAINTEXT, value: &v, length: strideof(Int32))
+        try setOption(ZMQ_GSSAPI_PLAINTEXT, value)
     }
 
     public func setGSSAPIPrincipal(value: String) throws {
-        try value.withCString { v in
-            try setOption(ZMQ_GSSAPI_PRINCIPAL, value: v, length: value.utf8.count)
-        }
+        try setOption(ZMQ_GSSAPI_PRINCIPAL, value)
     }
 
     public func setGSSAPIServer(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_GSSAPI_SERVER, value: &v, length: strideof(Int32))
+        try setOption(ZMQ_GSSAPI_SERVER, value)
     }
 
     public func setGSSAPIServicePrincipal(value: String) throws {
-        try value.withCString { v in
-            try setOption(ZMQ_GSSAPI_SERVICE_PRINCIPAL, value: v, length: value.utf8.count)
-        }
+        try setOption(ZMQ_GSSAPI_SERVICE_PRINCIPAL, value)
     }
 
     public func setHandshakeInterval(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_HANDSHAKE_IVL, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_HANDSHAKE_IVL, value)
     }
 
-    public func setHeartbeatInterval(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_HEARTBEAT_IVL, value: &value, length: strideof(Int32))
-    }
+    // public func setHeartbeatInterval(value: Int32) throws {
+    //     try setOption(ZMQ_HEARTBEAT_IVL, value)
+    // }
 
-    public func setHeartbeatTimeout(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_HEARTBEAT_TIMEOUT, value: &value, length: strideof(Int32))
-    }
+    // public func setHeartbeatTimeout(value: Int32) throws {
+    //     try setOption(ZMQ_HEARTBEAT_TIMEOUT, value)
+    // }
 
-    public func setHeartbeatTTTL(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_HEARTBEAT_TTL, value: &value, length: strideof(Int32))
-    }
+    // public func setHeartbeatTTTL(value: Int32) throws {
+    //     try setOption(ZMQ_HEARTBEAT_TTL, value)
+    // }
 
     public func setIdentity(value: String) throws {
-        try value.withCString { v in
-            try setOption(ZMQ_IDENTITY, value: v, length: value.utf8.count)
-        }
+        try setOption(ZMQ_IDENTITY, value)
     }
 
     public func setImmediate(value: Bool) throws {
-        var value = value ? 1 : 0
-        try setOption(ZMQ_IMMEDIATE, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_IMMEDIATE, value)
     }
 
-    public func setInvertMatching(value: Bool) throws {
-        var value = value ? 1 : 0
-        try setOption(ZMQ_INVERT_MATCHING, value: &value, length: strideof(Int32))
-    }
+    // public func setInvertMatching(value: Bool) throws {
+    //     try setOption(ZMQ_INVERT_MATCHING, value)
+    // }
 
     public func setIPV6(value: Bool) throws {
-        var value = value ? 1 : 0
-        try setOption(ZMQ_IPV6, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_IPV6, value)
     }
 
     public func setLinger(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_LINGER, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_LINGER, value)
     }
 
     public func setMaxMessageSize(value: Int64) throws {
@@ -326,144 +314,107 @@ extension Socket {
     }
 
     public func setMulticastHops(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_MULTICAST_HOPS, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_MULTICAST_HOPS, value)
     }
 
     public func setPlainPassword(value: String?) throws {
-        if let value = value {
-            try value.withCString { v in
-                try setOption(ZMQ_PLAIN_PASSWORD, value: v, length: value.utf8.count)
-            }
-        } else {
-            try setOption(ZMQ_PLAIN_PASSWORD, value: nil, length: 0)
-        }
+        try setOption(ZMQ_PLAIN_PASSWORD, value)
     }
 
     public func setPlainServer(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_PLAIN_SERVER, value: &v, length: strideof(Int32))
+        try setOption(ZMQ_PLAIN_SERVER, value)
     }
 
     public func setPlainUsername(value: String?) throws {
-        if let value = value {
-            try value.withCString { v in
-                try setOption(ZMQ_PLAIN_USERNAME, value: v, length: value.utf8.count)
-            }
-        } else {
-            try setOption(ZMQ_PLAIN_USERNAME, value: nil, length: 0)
-        }
+        try setOption(ZMQ_PLAIN_USERNAME, value)
     }
 
     public func setProbeRouter(value: Bool) throws {
-        var value = value ? 1 : 0
-        try setOption(ZMQ_PROBE_ROUTER, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_PROBE_ROUTER, value)
     }
 
     public func setRate(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_RATE, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_RATE, value)
     }
 
     public func setReceiveBuffer(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_RCVBUF, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_RCVBUF, value)
     }
 
     public func setReceiveHighWaterMark(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_RCVHWM, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_RCVHWM, value)
     }
 
     public func setReceiveTimeout(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_RCVTIMEO, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_RCVTIMEO, value)
     }
 
     public func setReconnectInterval(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_RECONNECT_IVL, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_RECONNECT_IVL, value)
     }
 
     public func setReconnectIntervalMax(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_RECONNECT_IVL_MAX, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_RECONNECT_IVL_MAX, value)
     }
 
     public func setRecoveryInterval(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_RECOVERY_IVL, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_RECOVERY_IVL, value)
     }
 
     public func setReqCorrelate(value: Bool) throws {
-        var value = value ? 1 : 0
-        try setOption(ZMQ_REQ_CORRELATE, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_REQ_CORRELATE, value)
     }
 
     public func setReqRelaxed(value: Bool) throws {
-        var value = value ? 1 : 0
-        try setOption(ZMQ_REQ_RELAXED, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_REQ_RELAXED, value)
     }
 
     public func setRouterHandover(value: Bool) throws {
-        var value = value ? 1 : 0
-        try setOption(ZMQ_ROUTER_HANDOVER, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_ROUTER_HANDOVER, value)
     }
 
     public func setRouterMandatory(value: Bool) throws {
-        var value = value ? 1 : 0
-        try setOption(ZMQ_ROUTER_MANDATORY, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_ROUTER_MANDATORY, value)
     }
 
     public func setRouterRaw(value: Bool) throws {
-        var value = value ? 1 : 0
-        try setOption(ZMQ_ROUTER_RAW, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_ROUTER_RAW, value)
     }
 
     public func setSendBuffer(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_SNDBUF, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_SNDBUF, value)
     }
 
     public func setSendHighWaterMark(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_SNDHWM, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_SNDHWM, value)
     }
 
     public func setSendTimeout(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_SNDTIMEO, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_SNDTIMEO, value)
     }
 
-    public func setStreamNotify(value: Bool) throws {
-        var value = value ? 1 : 0
-        try setOption(ZMQ_STREAM_NOTIFY, value: &value, length: strideof(Int32))
-    }
+    // public func setStreamNotify(value: Bool) throws {
+    //     try setOption(ZMQ_STREAM_NOTIFY, value)
+    // }
 
-    public func setSubscribe(value: String) throws {
-        try value.withCString { v in
-            try setOption(ZMQ_SUBSCRIBE, value: v, length: value.utf8.count)
-        }
+    public func setSubscribe(value: Data) throws {
+        try setOption(ZMQ_SUBSCRIBE, value)
     }
 
     public func setTCPKeepAlive(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_TCP_KEEPALIVE, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_TCP_KEEPALIVE, value)
     }
 
     public func setTCPKeepAliveCount(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_TCP_KEEPALIVE_CNT, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_TCP_KEEPALIVE_CNT, value)
     }
 
     public func setTCPKeepAliveIdle(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_TCP_KEEPALIVE_IDLE, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_TCP_KEEPALIVE_IDLE, value)
     }
 
     public func setTCPKeepAliveInterval(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_TCP_KEEPALIVE_INTVL, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_TCP_KEEPALIVE_INTVL, value)
     }
 
 //    public func setTCPRetransmitTimeout(var value: Int32) throws {
@@ -471,19 +422,15 @@ extension Socket {
 //    }
 
     public func setTypeOfService(value: Int32) throws {
-        var value = value
-        try setOption(ZMQ_TOS, value: &value, length: strideof(Int32))
+        try setOption(ZMQ_TOS, value)
     }
 
-    public func setUnsubscribe(value: String) throws {
-        try value.withCString { v in
-            try setOption(ZMQ_UNSUBSCRIBE, value: v, length: value.utf8.count)
-        }
+    public func setUnsubscribe(value: Data) throws {
+        try setOption(ZMQ_UNSUBSCRIBE, value)
     }
 
     public func setXPubVerbose(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_XPUB_VERBOSE, value: &v, length: strideof(Int32))
+        try setOption(ZMQ_XPUB_VERBOSE, value)
     }
 
 //    public func setXPubVerboseUnsubscribe(value: Bool) throws {
@@ -491,30 +438,38 @@ extension Socket {
 //        try setOption(ZMQ_XPUB_VERBOSE_UNSUBSCRIBE, value: &v, length: strideof(Int32))
 //    }
 
-    public func setXPubManual(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_XPUB_MANUAL, value: &v, length: strideof(Int32))
-    }
+    // public func setXPubManual(value: Bool) throws {
+    //     try setOption(ZMQ_XPUB_MANUAL, value)
+    // }
 
     public func setXPubNoDrop(value: Bool) throws {
-        var v = value ? 1 : 0
-        try setOption(ZMQ_XPUB_NODROP, value: &v, length: strideof(Int32))
+        try setOption(ZMQ_XPUB_NODROP, value)
     }
 
-    public func setXPubWelcomeMessage(value: String) throws {
-        try value.withCString { v in
-            try setOption(ZMQ_XPUB_WELCOME_MSG, value: v, length: value.utf8.count)
-        }
-    }
+    // public func setXPubWelcomeMessage(value: String) throws {
+    //     try setOption(ZMQ_XPUB_WELCOME_MSG, value)
+    // }
 
     public func setZAPDomain(value: String?) throws {
-        if let value = value {
-            try value.withCString { v in
-                try setOption(ZMQ_ZAP_DOMAIN, value: v, length: value.utf8.count)
-            }
-        } else {
-            try setOption(ZMQ_ZAP_DOMAIN, value: nil, length: 0)
-        }
+        try setOption(ZMQ_ZAP_DOMAIN, value)
+    }
+}
+extension Socket {
+    func getOption(option: Int32) throws -> Int32 {
+        var value: Int32 = 0
+        var length = strideof(Int32)
+        try getOption(option, value: &value, length: &length)
+        return value
+    }
+    func getOption(option: Int32) throws -> Bool {
+        let value: Int32 = try getOption(option)
+        return value != 0
+    }
+    func getOption(option: Int32, count: Int) throws -> String? {
+        var value = [Int8](repeating: 0, count: count)
+        var length = value.count
+        try getOption(option, value: &value, length: &length)
+        return String(validatingUTF8: Array(value[0 ..< length]))
     }
 }
 
@@ -527,136 +482,80 @@ extension Socket {
     }
 
     public func getBacklog() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_BACKLOG, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_BACKLOG)
     }
 
-    public func getConnectTimeout() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_CONNECT_TIMEOUT, value: &value, length: &length)
-        return value
-    }
+    // public func getConnectTimeout() throws -> Int32 {
+    //     return try getOption(ZMQ_CONNECT_TIMEOUT)
+    // }
 
     public func getCURVEPublicKey() throws -> String {
-        var value = [Int8](repeating: 0, count: 41)
-        var length = value.count
-        try getOption(ZMQ_CURVE_PUBLICKEY, value: &value, length: &length)
-        return String(validatingUTF8: Array(value[0 ..< length]))!
+        return try getOption(ZMQ_CURVE_PUBLICKEY, count: 41)!
     }
 
     public func getCURVESecretKey() throws -> String {
-        var value = [Int8](repeating: 0, count: 41)
-        var length = value.count
-        try getOption(ZMQ_CURVE_SECRETKEY, value: &value, length: &length)
-        return String(validatingUTF8: Array(value[0 ..< length]))!
+        return try getOption(ZMQ_CURVE_SECRETKEY, count: 41)!
     }
 
     public func getCURVEServerKey() throws -> String {
-        var value = [Int8](repeating: 0, count: 41)
-        var length = value.count
-        try getOption(ZMQ_CURVE_SERVERKEY, value: &value, length: &length)
-        return String(validatingUTF8: Array(value[0 ..< length]))!
+        return try getOption(ZMQ_CURVE_SERVERKEY, count: 41)!
     }
 
     public func getEvents() throws -> PollEvent? {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_EVENTS, value: &value, length: &length)
+        let value: Int32 = try getOption(ZMQ_EVENTS)
         return Int(value) == -1 ? nil : PollEvent(rawValue: Int16(value))
     }
 
     public func getFileDescriptor() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_FD, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_FD)
     }
 
     public func getGSSAPIPlainText() throws -> Bool {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_GSSAPI_PLAINTEXT, value: &value, length: &length)
-        return value != 0
+        return try getOption(ZMQ_GSSAPI_PLAINTEXT)
     }
 
     public func getGSSAPIPrincipal() throws -> String {
-        var value = [Int8](repeating: 0, count: 256)
-        var length = value.count
-        try getOption(ZMQ_GSSAPI_PRINCIPAL, value: &value, length: &length)
-        return String(validatingUTF8: Array(value[0 ..< length]))!
+        return try getOption(ZMQ_GSSAPI_PRINCIPAL, count: 256)!
     }
 
     public func getGSSAPIServer() throws -> Bool {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_GSSAPI_SERVER, value: &value, length: &length)
-        return value != 0
+        return try getOption(ZMQ_GSSAPI_SERVER)
     }
 
     public func getGSSAPIServicePrincipal() throws -> String {
-        var value = [Int8](repeating: 0, count: 256)
-        var length = value.count
-        try getOption(ZMQ_GSSAPI_SERVICE_PRINCIPAL, value: &value, length: &length)
-        return String(validatingUTF8: Array(value[0 ..< length]))!
+        return try getOption(ZMQ_GSSAPI_SERVICE_PRINCIPAL, count: 256)!
     }
 
     public func getHandshakeInterval() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_HANDSHAKE_IVL, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_HANDSHAKE_IVL)
     }
 
     public func getIdentity() throws -> String {
-        var value = [Int8](repeating: 0, count: 256)
-        var length = value.count
-        try getOption(ZMQ_IDENTITY, value: &value, length: &length)
-        return String(validatingUTF8: Array(value[0 ..< length])) ?? ""
+        return try getOption(ZMQ_IDENTITY, count: 256) ?? ""
     }
 
     public func getImmediate() throws -> Bool {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_IMMEDIATE, value: &value, length: &length)
-        return value != 0
+        return try getOption(ZMQ_IMMEDIATE)
     }
 
-    public func getInvertMatching() throws -> Bool {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_INVERT_MATCHING, value: &value, length: &length)
-        return value != 0
-    }
+    // public func getInvertMatching() throws -> Bool {
+    //     return try getOption(ZMQ_INVERT_MATCHING)
+    // }
 
     public func getIPV4Only() throws -> Bool {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_IPV4ONLY, value: &value, length: &length)
-        return value != 0
+        return try getOption(ZMQ_IPV4ONLY)
     }
 
     public func getIPV6() throws -> Bool {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_IPV6, value: &value, length: &length)
-        return value != 0
+        return try getOption(ZMQ_IPV6)
     }
 
     public func getLastEndpoint() throws -> String {
-        var value = [Int8](repeating: 0, count: 256)
-        var length = value.count
-        try getOption(ZMQ_LAST_ENDPOINT, value: &value, length: &length)
-        return String(validatingUTF8: Array(value[0 ..< length]))!
+        return try getOption(ZMQ_LAST_ENDPOINT, count: 256)!
     }
 
     public func getLinger() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_LINGER, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_LINGER)
     }
 
     public func getMaxMessageSize() throws -> Int64 {
@@ -667,143 +566,84 @@ extension Socket {
     }
 
     public func getMechanism() throws -> SecurityMechanism {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_MECHANISM, value: &value, length: &length)
+        let value: Int32 = try getOption(ZMQ_MECHANISM)
         return SecurityMechanism(rawValue: value)!
     }
 
     public func getMulticastHops() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_MULTICAST_HOPS, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_MULTICAST_HOPS)
     }
 
     public func getPlainPassword() throws -> String {
-        var value = [Int8](repeating: 0, count: 256)
-        var length = value.count
-        try getOption(ZMQ_PLAIN_PASSWORD, value: &value, length: &length)
-        return String(validatingUTF8: Array(value[0 ..< length]))!
+        return try getOption(ZMQ_PLAIN_PASSWORD, count: 256)!
     }
 
     public func getPlainServer() throws -> Bool {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_PLAIN_SERVER, value: &value, length: &length)
-        return value != 0
+        return try getOption(ZMQ_PLAIN_SERVER)
     }
 
     public func getPlainUsername() throws -> String {
-        var value = [Int8](repeating: 0, count: 256)
-        var length = value.count
-        try getOption(ZMQ_PLAIN_USERNAME, value: &value, length: &length)
-        return String(validatingUTF8: Array(value[0 ..< length]))!
+        return try getOption(ZMQ_PLAIN_USERNAME, count: 256)!
     }
 
     public func getRate() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_RATE, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_RATE)
     }
 
     public func getReceiveBuffer() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_RCVBUF, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_RCVBUF)
     }
 
     public func getReceiveHighWaterMark() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_RCVHWM, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_RCVHWM)
     }
 
     public func getReceiveMore() throws -> Bool {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_RCVMORE, value: &value, length: &length)
-        return value != 0
+        return try getOption(ZMQ_RCVMORE)
     }
 
     public func getReceiveTimeout() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_RCVTIMEO, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_RCVTIMEO)
     }
 
     public func getReconnectInterval() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_RECONNECT_IVL, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_RECONNECT_IVL)
     }
 
     public func getReconnectIntervalMax() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_RECONNECT_IVL_MAX, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_RECONNECT_IVL_MAX)
     }
 
     public func getRecoveryInterval() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_RECOVERY_IVL, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_RECOVERY_IVL)
     }
 
     public func getSendBuffer() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_SNDBUF, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_SNDBUF)
     }
 
     public func getSendHighWaterMark() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_SNDHWM, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_SNDHWM)
     }
 
     public func getSendTimeout() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_SNDTIMEO, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_SNDTIMEO)
     }
 
     public func getTCPKeepAlive() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_TCP_KEEPALIVE, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_TCP_KEEPALIVE)
     }
 
     public func getTCPKeepAliveCount() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_TCP_KEEPALIVE_CNT, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_TCP_KEEPALIVE_CNT)
     }
 
     public func getTCPKeepAliveIdle() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_TCP_KEEPALIVE_IDLE, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_TCP_KEEPALIVE_IDLE)
     }
 
     public func getTCPKeepAliveInterval() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_TCP_KEEPALIVE_INTVL, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_TCP_KEEPALIVE_INTVL)
     }
 
 //    public func getTCPRetransmitTimeout() throws -> Int32 {
@@ -813,32 +653,21 @@ extension Socket {
 //        return value
 //    }
 
-    public func getThreadSafe() throws -> Bool {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_THREAD_SAFE, value: &value, length: &length)
-        return value != 0
-    }
+    // public func getThreadSafe() throws -> Bool {
+    //     return try getOption(ZMQ_THREAD_SAFE)
+    // }
 
     public func getTypeOfService() throws -> Int32 {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_TOS, value: &value, length: &length)
-        return value
+        return try getOption(ZMQ_TOS)
     }
 
     public func getType() throws -> SocketType {
-        var value: Int32 = 0
-        var length = strideof(Int32)
-        try getOption(ZMQ_TYPE, value: &value, length: &length)
+        let value: Int32 = try getOption(ZMQ_TYPE)
         return SocketType(rawValue: value)!
     }
 
     public func getZAPDomain() throws -> String {
-        var value = [Int8](repeating: 0, count: 256)
-        var length = value.count
-        try getOption(ZMQ_ZAP_DOMAIN, value: &value, length: &length)
-        return String(validatingUTF8: Array(value[0 ..< length]))!
+        return try getOption(ZMQ_ZAP_DOMAIN, count: 256)!
     }
 }
 

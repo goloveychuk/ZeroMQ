@@ -34,7 +34,7 @@ public struct PollEvent : OptionSet {
     public static let In       = PollEvent(rawValue: Int16(ZMQ_POLLIN))
     public static let Out      = PollEvent(rawValue: Int16(ZMQ_POLLOUT))
     public static let Error    = PollEvent(rawValue: Int16(ZMQ_POLLERR))
-    public static let Priority = PollEvent(rawValue: Int16(ZMQ_POLLPRI))
+    // public static let Priority = PollEvent(rawValue: Int16(ZMQ_POLLPRI))
 }
 
 public enum PollItemEvent {
