@@ -23,7 +23,7 @@
 // SOFTWARE.
 
 import CZeroMQ
-import Data
+import C7
 
 public struct SendMode : OptionSet {
     public let rawValue: Int
@@ -143,7 +143,7 @@ public final class Socket {
     }
 
     public func receive(bufferSize bufferSize: Int = 1024, mode: ReceiveMode = []) throws -> Data? {
-        var data = Data.bufferWithSize(bufferSize)
+        var data = Data.buffer(with: bufferSize)
         let result = zmq_recv(socket, &data.bytes, bufferSize, Int32(mode.rawValue))
         if result == -1 && zmq_errno() == EAGAIN {
             return nil
