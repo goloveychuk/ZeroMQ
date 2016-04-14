@@ -43,7 +43,7 @@ public final class Message {
         }
     }
 
-    public init(data: UnsafeMutablePointer<Void>, size: Int, hint: UnsafeMutablePointer<Void> = nil, ffn: @convention(c) (UnsafeMutablePointer<Void>, UnsafeMutablePointer<Void>) -> Void) throws {
+    public init(data: UnsafeMutablePointer<Void>, size: Int, hint: UnsafeMutablePointer<Void>? = nil, ffn: @convention(c) (UnsafeMutablePointer<Void>!, UnsafeMutablePointer<Void>!) -> Void) throws {
         message = zmq_msg_t()
 
         if zmq_msg_init_data(&message, data, size, ffn, hint) == -1 {
@@ -63,15 +63,15 @@ public final class Message {
         zmq_msg_close(&message)
     }
 
-    func setProperty(property: Int32, value: Int32) {
+    func setProperty(_ property: Int32, value: Int32) {
         zmq_msg_set(&message, property, value)
     }
 
-    func getProperty(property: Int32) -> Int32 {
+    func getProperty(_ property: Int32) -> Int32 {
         return zmq_msg_get(&message, property)
     }
 
-    public func getProperty(property: String) throws -> String {
+    public func getProperty(_ property: String) throws -> String {
         let result = zmq_msg_gets(&message, property)
 
         if result == nil {

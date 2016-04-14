@@ -57,13 +57,13 @@ public final class Socket {
         zmq_close(socket)
     }
 
-    func setOption(option: Int32, value: UnsafePointer<Void>, length: Int) throws {
+    func setOption(_ option: Int32, value: UnsafePointer<Void>?, length: Int) throws {
         if zmq_setsockopt(socket, option, value, length) == -1 {
             throw Error.lastError
         }
     }
 
-    func getOption(option: Int32, value: UnsafeMutablePointer<Void>, length: UnsafeMutablePointer<Int>) throws {
+    func getOption(_ option: Int32, value: UnsafeMutablePointer<Void>, length: UnsafeMutablePointer<Int>) throws {
         if zmq_getsockopt(socket, option, value, length) == -1 {
             throw Error.lastError
         }
@@ -95,7 +95,7 @@ public final class Socket {
         return true
     }
 
-    func send(buffer: UnsafeMutablePointer<Void>, length: Int, mode: SendMode = []) throws -> Bool {
+    func send(_ buffer: UnsafeMutablePointer<Void>, length: Int, mode: SendMode = []) throws -> Bool {
         let result = zmq_send(socket, buffer, length, Int32(mode.rawValue))
 
         if result == -1 && zmq_errno() == EAGAIN {
@@ -108,12 +108,12 @@ public final class Socket {
 
         return true
     }
-    public func send(data: Data, mode: SendMode = []) throws -> Bool {
+    public func send(_ data: Data, mode: SendMode = []) throws -> Bool {
         var data = data
         return try self.send(&data.bytes, length: data.count, mode: mode)
     }
 
-    func sendImmutable(buffer: UnsafePointer<Void>, length: Int, mode: SendMode = []) throws -> Bool {
+    func sendImmutable(_ buffer: UnsafePointer<Void>, length: Int, mode: SendMode = []) throws -> Bool {
         let result = zmq_send_const(socket, buffer, length, Int32(mode.rawValue))
 
         if result == -1 && zmq_errno() == EAGAIN {
@@ -142,7 +142,7 @@ public final class Socket {
         return message
     }
 
-    public func receive(bufferSize bufferSize: Int = 1024, mode: ReceiveMode = []) throws -> Data? {
+    public func receive(bufferSize: Int = 1024, mode: ReceiveMode = []) throws -> Data? {
         var data = Data.buffer(with: bufferSize)
         let result = zmq_recv(socket, &data.bytes, bufferSize, Int32(mode.rawValue))
         if result == -1 && zmq_errno() == EAGAIN {
@@ -191,23 +191,23 @@ public struct SocketEvent : OptionSet {
 }
 
 extension Socket {
-    func setOption(option: Int32, _ value: Bool) throws {
+    func setOption(_ option: Int32, _ value: Bool) throws {
         var value = value ? 1 : 0
         try setOption(option, value: &value, length: strideof(Int32))
     }
-    func setOption(option: Int32, _ value: Int32) throws {
+    func setOption(_ option: Int32, _ value: Int32) throws {
         var value = value
         try setOption(option, value: &value, length: strideof(Int32))
     }
-    func setOption(option: Int32, _ value: String) throws {
+    func setOption(_ option: Int32, _ value: String) throws {
         try value.withCString { v in
             try setOption(option, value: v, length: value.utf8.count)
         }
     }
-    func setOption(option: Int32, _ value: Data) throws {
+    func setOption(_ option: Int32, _ value: Data) throws {
         try setOption(option, value: value.bytes, length: value.count)
     }
-    func setOption(option: Int32, _ value: String?) throws {
+    func setOption(_ option: Int32, _ value: String?) throws {
         if let value = value {
             try value.withCString { v in
                 try setOption(option, value: v, length: value.utf8.count)
@@ -455,17 +455,17 @@ extension Socket {
     }
 }
 extension Socket {
-    func getOption(option: Int32) throws -> Int32 {
+    func getOption(_ option: Int32) throws -> Int32 {
         var value: Int32 = 0
         var length = strideof(Int32)
         try getOption(option, value: &value, length: &length)
         return value
     }
-    func getOption(option: Int32) throws -> Bool {
+    func getOption(_ option: Int32) throws -> Bool {
         let value: Int32 = try getOption(option)
         return value != 0
     }
-    func getOption(option: Int32, count: Int) throws -> String? {
+    func getOption(_ option: Int32, count: Int) throws -> String? {
         var value = [Int8](repeating: 0, count: count)
         var length = value.count
         try getOption(option, value: &value, length: &length)
