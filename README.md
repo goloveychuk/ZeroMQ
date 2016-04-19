@@ -1,4 +1,4 @@
-SwiftZMQ
+ZeroMQ
 ========
 
 [![Swift][swift-badge]][swift-url]
