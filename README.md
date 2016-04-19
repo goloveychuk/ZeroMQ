@@ -1,12 +1,13 @@
 SwiftZMQ
 ========
 
-[![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![Platforms OS X](https://img.shields.io/badge/Platforms-OS%20X-lightgray.svg?style=flat)](https://developer.apple.com/swift/)
-[![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://tldrlegal.com/license/mit-license)
-[![Slack Status](https://zewo-slackin.herokuapp.com/badge.svg)](https://zewo-slackin.herokuapp.com)
+[![Swift][swift-badge]][swift-url]
+[![Platform][platform-badge]][platform-url]
+[![License][mit-badge]][mit-url]
+[![Slack][slack-badge]][slack-url]
 
-**SwiftZMQ** is a [ZeroMQ](http://zeromq.org/) binding for **Swift 3**.
+
+**ZeroMQ** is a [0mq](http://zeromq.org/) binding for **Swift 3**.
 
 ## Installation
 
@@ -15,7 +16,7 @@ import PackageDescription
 
 let package = Package(
     dependencies: [
-        .Package(url: "https://github.com/Zewo/ZeroMQ.git", majorVersion: 0, minor: 4)
+        .Package(url: "https://github.com/Zewo/ZeroMQ.git", majorVersion: 0, minor: 5)
     ]
 )
 ```
@@ -29,12 +30,11 @@ let package = Package(
 - [x] Poller
 - [x] Proxy
 
-This fork clones the libzmq repo and compiles it statically into the SwiftZMQ framework, also it adds the iOS framework target
 
 ##Example
 
 ```swift
-import SwiftZMQ
+import ZeroMQ
 
 do {
     let context = try Context()
@@ -58,10 +58,10 @@ do {
 
 ## Dependency
 
-**SwiftZMQ** requires ZeroMQ version 4.2 to be installed. The easiest way on Mac OS X is through brew.
+**ZeroMQ** requires 0mq version 4.1.2 to be installed. The easiest way on Mac OS X is through brew.
 
 ```
-> brew install zeromq --with-libsodium --HEAD
+> brew install zeromq --with-libsodium
 ```
 
 ## Community
@@ -74,3 +74,13 @@ License
 -------
 
 **SwiftZMQ** is released under the MIT license. See LICENSE for details.
+
+[swift-badge]: https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat
+[swift-url]: https://swift.org
+[platform-badge]: https://img.shields.io/badge/Platform-Mac%20%26%20Linux-lightgray.svg?style=flat
+[platform-url]: https://swift.org
+[mit-badge]: https://img.shields.io/badge/License-MIT-blue.svg?style=flat
+[mit-url]: https://tldrlegal.com/license/mit-license
+[slack-image]: http://s13.postimg.org/ybwy92ktf/Slack.png
+[slack-badge]: https://zewo-slackin.herokuapp.com/badge.svg
+[slack-url]: http://slack.zewo.io
