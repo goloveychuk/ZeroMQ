@@ -86,7 +86,7 @@ extension SocketType {
 }
 
 public final class Context {
-    let context: UnsafeMutablePointer<Void>
+    let context: UnsafeMutablePointer<Void>?
 
     public init() throws {
         context = zmq_ctx_new()
@@ -116,11 +116,11 @@ public final class Context {
         }
     }
 
-    func setOption(option: Int32, value: Int32) {
+    func setOption(_ option: Int32, value: Int32) {
         zmq_ctx_set(context, option, value)
     }
 
-    func getOption(option: Int32) -> Int32 {
+    func getOption(_ option: Int32) -> Int32 {
         return zmq_ctx_get(context, option)
     }
 
