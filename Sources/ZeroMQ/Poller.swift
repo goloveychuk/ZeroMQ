@@ -65,7 +65,7 @@ public enum PollItemEvent {
     }
 }
 
-public func poll(items: PollItemEvent..., timeout: Int) throws -> [PollItemEvent] {
+public func poll(_ items: PollItemEvent..., timeout: Int) throws -> [PollItemEvent] {
     var pollItems = items.map { $0.pollItem }
 
     if zmq_poll(&pollItems, Int32(pollItems.count), timeout) == -1 {

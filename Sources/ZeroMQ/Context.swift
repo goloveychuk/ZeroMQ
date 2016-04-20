@@ -124,7 +124,7 @@ public final class Context {
         return zmq_ctx_get(context, option)
     }
 
-    public func socket(type: SocketType) throws -> Socket {
+    public func socket(_ type: SocketType) throws -> Socket {
         let socket = zmq_socket(context, type.rawValue)
 
         if socket == nil {
@@ -176,11 +176,11 @@ extension Context {
         return getOption(ZMQ_SOCKET_LIMIT)
     }
 
-    public func setThreadSchedulingPolicy(value: Int32) {
+    public func setThreadSchedulingPolicy(_ value: Int32) {
         setOption(ZMQ_THREAD_SCHED_POLICY, value: value)
     }
 
-    public func setThreadPriority(value: Int32) {
+    public func setThreadPriority(_ value: Int32) {
         setOption(ZMQ_THREAD_PRIORITY, value: value)
     }
 }

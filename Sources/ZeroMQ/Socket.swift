@@ -69,19 +69,19 @@ public final class Socket {
         }
     }
 
-    public func bind(endpoint: String) throws {
+    public func bind(_ endpoint: String) throws {
         if zmq_bind(socket, endpoint) == -1 {
             throw Error.lastError
         }
     }
 
-    public func connect(endpoint: String) throws {
+    public func connect(_ endpoint: String) throws {
         if zmq_connect(socket, endpoint) == -1 {
             throw Error.lastError
         }
     }
 
-    public func sendMessage(message: Message, mode: SendMode = []) throws -> Bool {
+    public func sendMessage(_ message: Message, mode: SendMode = []) throws -> Bool {
         let result = zmq_msg_send(&message.message, socket, Int32(mode.rawValue))
 
         if result == -1 && zmq_errno() == EAGAIN {
@@ -127,7 +127,7 @@ public final class Socket {
         return true
     }
 
-    public func receiveMessage(mode: ReceiveMode = []) throws -> Message? {
+    public func receiveMessage(_ mode: ReceiveMode = []) throws -> Message? {
         let message = try Message()
         let result = zmq_msg_recv(&message.message, socket, Int32(mode.rawValue))
 
@@ -142,7 +142,7 @@ public final class Socket {
         return message
     }
 
-    public func receive(bufferSize: Int = 1024, mode: ReceiveMode = []) throws -> Data? {
+    public func receive(_ bufferSize: Int = 1024, mode: ReceiveMode = []) throws -> Data? {
         var data = Data.buffer(with: bufferSize)
         let result = zmq_recv(socket, &data.bytes, bufferSize, Int32(mode.rawValue))
         if result == -1 && zmq_errno() == EAGAIN {
@@ -162,7 +162,7 @@ public final class Socket {
         }
     }
 
-    public func monitor(endpoint: String, events: SocketEvent) throws {
+    public func monitor(_ endpoint: String, events: SocketEvent) throws {
         if zmq_socket_monitor(socket, endpoint, events.rawValue) == -1 {
             throw Error.lastError
         }
@@ -219,20 +219,20 @@ extension Socket {
 }
 
 extension Socket {
-    public func setAffinity(value: UInt64) throws {
+    public func setAffinity(_ value: UInt64) throws {
         var value = value
         try setOption(ZMQ_AFFINITY, value: &value, length: strideof(UInt64))
     }
 
-    public func setBacklog(value: Int32) throws {
+    public func setBacklog(_ value: Int32) throws {
         try setOption(ZMQ_BACKLOG, value)
     }
 
-    public func setConnectRID(value: String) throws {
+    public func setConnectRID(_ value: String) throws {
         try setOption(ZMQ_CONNECT_RID, value)
     }
 
-    public func setConflate(value: Bool) throws {
+    public func setConflate(_ value: Bool) throws {
         try setOption(ZMQ_CONFLATE, value)
     }
 
@@ -240,39 +240,39 @@ extension Socket {
     //     try setOption(ZMQ_CONNECT_TIMEOUT, value)
     // }
 
-    public func setCURVEPublicKey(value: String?) throws {        
+    public func setCURVEPublicKey(_ value: String?) throws {
         try setOption(ZMQ_CURVE_PUBLICKEY, value)
     }
 
-    public func setCURVESecretKey(value: String?) throws {
+    public func setCURVESecretKey(_ value: String?) throws {
         try setOption(ZMQ_CURVE_SECRETKEY, value)
     }
 
-    public func setCURVEServer(value: Bool) throws {
+    public func setCURVEServer(_ value: Bool) throws {
         try setOption(ZMQ_CURVE_SERVER, value)
     }
 
-    public func setCURVEServerKey(value: String?) throws {
+    public func setCURVEServerKey(_ value: String?) throws {
         try setOption(ZMQ_CURVE_SERVERKEY, value)
     }
 
-    public func setGSSAPIPlainText(value: Bool) throws {
+    public func setGSSAPIPlainText(_ value: Bool) throws {
         try setOption(ZMQ_GSSAPI_PLAINTEXT, value)
     }
 
-    public func setGSSAPIPrincipal(value: String) throws {
+    public func setGSSAPIPrincipal(_ value: String) throws {
         try setOption(ZMQ_GSSAPI_PRINCIPAL, value)
     }
 
-    public func setGSSAPIServer(value: Bool) throws {
+    public func setGSSAPIServer(_ value: Bool) throws {
         try setOption(ZMQ_GSSAPI_SERVER, value)
     }
 
-    public func setGSSAPIServicePrincipal(value: String) throws {
+    public func setGSSAPIServicePrincipal(_ value: String) throws {
         try setOption(ZMQ_GSSAPI_SERVICE_PRINCIPAL, value)
     }
 
-    public func setHandshakeInterval(value: Int32) throws {
+    public func setHandshakeInterval(_ value: Int32) throws {
         try setOption(ZMQ_HANDSHAKE_IVL, value)
     }
 
@@ -288,11 +288,11 @@ extension Socket {
     //     try setOption(ZMQ_HEARTBEAT_TTL, value)
     // }
 
-    public func setIdentity(value: String) throws {
+    public func setIdentity(_ value: String) throws {
         try setOption(ZMQ_IDENTITY, value)
     }
 
-    public func setImmediate(value: Bool) throws {
+    public func setImmediate(_ value: Bool) throws {
         try setOption(ZMQ_IMMEDIATE, value)
     }
 
@@ -300,96 +300,96 @@ extension Socket {
     //     try setOption(ZMQ_INVERT_MATCHING, value)
     // }
 
-    public func setIPV6(value: Bool) throws {
+    public func setIPV6(_ value: Bool) throws {
         try setOption(ZMQ_IPV6, value)
     }
 
-    public func setLinger(value: Int32) throws {
+    public func setLinger(_ value: Int32) throws {
         try setOption(ZMQ_LINGER, value)
     }
 
-    public func setMaxMessageSize(value: Int64) throws {
+    public func setMaxMessageSize(_ value: Int64) throws {
         var value = value
         try setOption(ZMQ_MAXMSGSIZE, value: &value, length: strideof(Int64))
     }
 
-    public func setMulticastHops(value: Int32) throws {
+    public func setMulticastHops(_ value: Int32) throws {
         try setOption(ZMQ_MULTICAST_HOPS, value)
     }
 
-    public func setPlainPassword(value: String?) throws {
+    public func setPlainPassword(_ value: String?) throws {
         try setOption(ZMQ_PLAIN_PASSWORD, value)
     }
 
-    public func setPlainServer(value: Bool) throws {
+    public func setPlainServer(_ value: Bool) throws {
         try setOption(ZMQ_PLAIN_SERVER, value)
     }
 
-    public func setPlainUsername(value: String?) throws {
+    public func setPlainUsername(_ value: String?) throws {
         try setOption(ZMQ_PLAIN_USERNAME, value)
     }
 
-    public func setProbeRouter(value: Bool) throws {
+    public func setProbeRouter(_ value: Bool) throws {
         try setOption(ZMQ_PROBE_ROUTER, value)
     }
 
-    public func setRate(value: Int32) throws {
+    public func setRate(_ value: Int32) throws {
         try setOption(ZMQ_RATE, value)
     }
 
-    public func setReceiveBuffer(value: Int32) throws {
+    public func setReceiveBuffer(_ value: Int32) throws {
         try setOption(ZMQ_RCVBUF, value)
     }
 
-    public func setReceiveHighWaterMark(value: Int32) throws {
+    public func setReceiveHighWaterMark(_ value: Int32) throws {
         try setOption(ZMQ_RCVHWM, value)
     }
 
-    public func setReceiveTimeout(value: Int32) throws {
+    public func setReceiveTimeout(_ value: Int32) throws {
         try setOption(ZMQ_RCVTIMEO, value)
     }
 
-    public func setReconnectInterval(value: Int32) throws {
+    public func setReconnectInterval(_ value: Int32) throws {
         try setOption(ZMQ_RECONNECT_IVL, value)
     }
 
-    public func setReconnectIntervalMax(value: Int32) throws {
+    public func setReconnectIntervalMax(_ value: Int32) throws {
         try setOption(ZMQ_RECONNECT_IVL_MAX, value)
     }
 
-    public func setRecoveryInterval(value: Int32) throws {
+    public func setRecoveryInterval(_ value: Int32) throws {
         try setOption(ZMQ_RECOVERY_IVL, value)
     }
 
-    public func setReqCorrelate(value: Bool) throws {
+    public func setReqCorrelate(_ value: Bool) throws {
         try setOption(ZMQ_REQ_CORRELATE, value)
     }
 
-    public func setReqRelaxed(value: Bool) throws {
+    public func setReqRelaxed(_ value: Bool) throws {
         try setOption(ZMQ_REQ_RELAXED, value)
     }
 
-    public func setRouterHandover(value: Bool) throws {
+    public func setRouterHandover(_ value: Bool) throws {
         try setOption(ZMQ_ROUTER_HANDOVER, value)
     }
 
-    public func setRouterMandatory(value: Bool) throws {
+    public func setRouterMandatory(_ value: Bool) throws {
         try setOption(ZMQ_ROUTER_MANDATORY, value)
     }
 
-    public func setRouterRaw(value: Bool) throws {
+    public func setRouterRaw(_ value: Bool) throws {
         try setOption(ZMQ_ROUTER_RAW, value)
     }
 
-    public func setSendBuffer(value: Int32) throws {
+    public func setSendBuffer(_ value: Int32) throws {
         try setOption(ZMQ_SNDBUF, value)
     }
 
-    public func setSendHighWaterMark(value: Int32) throws {
+    public func setSendHighWaterMark(_ value: Int32) throws {
         try setOption(ZMQ_SNDHWM, value)
     }
 
-    public func setSendTimeout(value: Int32) throws {
+    public func setSendTimeout(_ value: Int32) throws {
         try setOption(ZMQ_SNDTIMEO, value)
     }
 
@@ -397,23 +397,23 @@ extension Socket {
     //     try setOption(ZMQ_STREAM_NOTIFY, value)
     // }
 
-    public func setSubscribe(value: Data) throws {
+    public func setSubscribe(_ value: Data) throws {
         try setOption(ZMQ_SUBSCRIBE, value)
     }
 
-    public func setTCPKeepAlive(value: Int32) throws {
+    public func setTCPKeepAlive(_ value: Int32) throws {
         try setOption(ZMQ_TCP_KEEPALIVE, value)
     }
 
-    public func setTCPKeepAliveCount(value: Int32) throws {
+    public func setTCPKeepAliveCount(_ value: Int32) throws {
         try setOption(ZMQ_TCP_KEEPALIVE_CNT, value)
     }
 
-    public func setTCPKeepAliveIdle(value: Int32) throws {
+    public func setTCPKeepAliveIdle(_ value: Int32) throws {
         try setOption(ZMQ_TCP_KEEPALIVE_IDLE, value)
     }
 
-    public func setTCPKeepAliveInterval(value: Int32) throws {
+    public func setTCPKeepAliveInterval(_ value: Int32) throws {
         try setOption(ZMQ_TCP_KEEPALIVE_INTVL, value)
     }
 
@@ -421,15 +421,15 @@ extension Socket {
 //        try setOption(ZMQ_TCP_RETRANSMIT_TIMEOUT, value: &value, length: strideof(Int32))
 //    }
 
-    public func setTypeOfService(value: Int32) throws {
+    public func setTypeOfService(_ value: Int32) throws {
         try setOption(ZMQ_TOS, value)
     }
 
-    public func setUnsubscribe(value: Data) throws {
+    public func setUnsubscribe(_ value: Data) throws {
         try setOption(ZMQ_UNSUBSCRIBE, value)
     }
 
-    public func setXPubVerbose(value: Bool) throws {
+    public func setXPubVerbose(_ value: Bool) throws {
         try setOption(ZMQ_XPUB_VERBOSE, value)
     }
 
@@ -442,7 +442,7 @@ extension Socket {
     //     try setOption(ZMQ_XPUB_MANUAL, value)
     // }
 
-    public func setXPubNoDrop(value: Bool) throws {
+    public func setXPubNoDrop(_ value: Bool) throws {
         try setOption(ZMQ_XPUB_NODROP, value)
     }
 
@@ -450,7 +450,7 @@ extension Socket {
     //     try setOption(ZMQ_XPUB_WELCOME_MSG, value)
     // }
 
-    public func setZAPDomain(value: String?) throws {
+    public func setZAPDomain(_ value: String?) throws {
         try setOption(ZMQ_ZAP_DOMAIN, value)
     }
 }
@@ -689,11 +689,11 @@ extension SecurityMechanism {
 }
 
 extension Socket {
-    public func sendString(string: String, mode: SendMode = []) throws -> Bool {
+    public func sendString(_ string: String, mode: SendMode = []) throws -> Bool {
         return try send(Data(string), mode: mode)
     }
 
-    public func receiveString(mode: ReceiveMode = []) throws -> String? {
+    public func receiveString(_ mode: ReceiveMode = []) throws -> String? {
         guard let buffer = try receive(mode: mode) else {
             return nil
         }

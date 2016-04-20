@@ -109,7 +109,7 @@ public final class Message {
         return message
     }
 
-    public func move(message: inout Message) throws {
+    public func move(_ message: inout Message) throws {
         let message = try Message()
 
         if zmq_msg_move(&message.message, &self.message) == -1 {
