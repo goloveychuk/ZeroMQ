@@ -14,11 +14,11 @@ script:
   - swift build --fetch # clones all dependencies
   - rm -rf Packages/*/Tests # deletes dependency's tests until duplicate Package.tests issue can be resolved in SPM. At that point, remove.
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        swift build -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib -Xlinker -rpath -Xlinker $(pwd)/.build/debug/;
-        swift build --configuration release -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib -Xlinker -rpath -Xlinker $(pwd)/.build/release/;
+        swift build -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib;
+        swift build --configuration release -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib;
     fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-        swift build -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib -Xlinker -rpath -Xlinker /usr/local/lib;
-        swift build --configuration release -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib -Xlinker -rpath -Xlinker /usr/local/lib;
+        swift build -Xlinker -rpath -Xlinker /usr/local/lib;
+        swift build --configuration release -Xlinker -rpath -Xlinker /usr/local/lib;
     fi
   - swift test
