@@ -28,7 +28,7 @@ class ZeroMQTests: XCTestCase {
 }
 
 extension ZeroMQTests {
-    static var allTests : [(String, ZeroMQTests -> () throws -> Void)] {
+    static var allTests: [(String, ZeroMQTests -> () throws -> Void)] {
         return [
            ("testPushPull", testPushPull),
         ]
