@@ -20,6 +20,8 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         swift build -Xcc -I/usr/include -Xlinker -L/usr/lib -Xlinker -rpath -Xlinker $(pwd)/.build/debug/;
         swift build --configuration release -Xcc -I/usr/include -Xlinker -L/usr/lib -Xlinker -rpath -Xlinker $(pwd)/.build/release/;
-        ldd .build/debug/ZeroMQ.xctest;
     fi
   - swift test
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        ldd .build/debug/ZeroMQ.xctest;
+    fi
