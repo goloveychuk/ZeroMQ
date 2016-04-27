@@ -1,13 +1,24 @@
+notifications:
+  slack: zewo:VjyVCCQvTOw9yrbzQysZezD1
 os:
-- linux
-- osx
+  - linux
+  - osx
 language: generic
 sudo: required
 dist: trusty
-osx_image: xcode7.2
+osx_image: xcode7.3
 install:
-- eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/02090c7ede5a637b76e6df1710e83cd0bbe7dcdf/swiftenv-install.sh)"
-- bash ./setup_env.sh
+  - eval "$(curl -sL https://raw.githubusercontent.com/Zewo/Zewo/5254525d9da56df29346fd76e99529c22034d61d/Scripts/install-swiftenv.sh)"
+  - bash ./setup_env.sh
 script:
-- if [[ "$(uname)" == "Darwin" ]]; then swift build -Xcc -I/usr/local/include; else swift build -Xcc -I/usr/include; fi
-
+  - swift build --fetch # clones all dependencies
+  - rm -rf Packages/*/Tests # deletes dependency's tests until duplicate Package.tests issue can be resolved in SPM. At that point, remove.
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        swift build -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib;
+        swift build --configuration release -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib;
+    fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        swift build -Xlinker -rpath -Xlinker /usr/local/lib;
+        swift build --configuration release -Xlinker -rpath -Xlinker /usr/local/lib;
+    fi
+  - swift test
