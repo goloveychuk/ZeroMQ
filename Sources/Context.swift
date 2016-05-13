@@ -125,9 +125,8 @@ public final class Context {
     }
 
     public func socket(_ type: SocketType) throws -> Socket {
-        let socket = zmq_socket(context, type.rawValue)
 
-        if socket == nil {
+        guard let socket = zmq_socket(context, type.rawValue) else {
             throw Error.lastError
         }
 
