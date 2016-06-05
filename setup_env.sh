@@ -7,7 +7,7 @@ if [[ "$(uname)" == "Linux" ]]; then
 fi
 
 cd /tmp/
-sudo curl -O http://download.zeromq.org/zeromq-4.1.4.tar.gz
+sudo curl -O https://github.com/zeromq/zeromq4-1/releases/download/v4.1.4/zeromq-4.1.4.tar.gz
 sudo tar xf /tmp/zeromq-4.1.4.tar.gz
 cd /tmp/zeromq-4.1.4
 sudo ./configure --without-libsodium
