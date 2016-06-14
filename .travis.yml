@@ -9,15 +9,16 @@ dist: trusty
 osx_image: xcode8
 install:
   - eval "$(curl -sL https://raw.githubusercontent.com/Zewo/Zewo/master/Scripts/install-swift.sh)"
+  - bash ./setup_env.sh
 script:
-  - swift build --fetch # clones all dependencies
+  - swift package fetch # clones all dependencies
   - rm -rf Packages/*/Tests # deletes dependency's tests until duplicate Package.tests issue can be resolved in SPM. At that point, remove.
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
         swift build -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib;
-        swift build --configuration release -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib;
+        swift build -c release -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib;
     fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         swift build -Xlinker -rpath -Xlinker /usr/local/lib;
-        swift build --configuration release -Xlinker -rpath -Xlinker /usr/local/lib;
+        swift build -c release -Xlinker -rpath -Xlinker /usr/local/lib;
     fi
   - swift test
