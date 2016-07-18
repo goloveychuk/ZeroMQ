@@ -1,4 +1,4 @@
-// zmq_swift.swift
+// CURVE.swift
 //
 // The MIT License (MIT)
 //
@@ -22,9 +22,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef zmw_swift_h
-#define zmw_swift_h
+import CZeroMQ
 
-#import <zmq.h>
+public func CURVEKeyPair() throws -> (publicKey: String, secretKey: String) {
+    var publicKey = [Int8](repeating: 0, count: 41)
+    var secretKey = [Int8](repeating: 0, count: 41)
 
-#endif /* zmw_swift_h */
+    if zmq_curve_keypair(&publicKey, &secretKey) == -1 {
+        throw Error.lastError
+    }
+
+    return (String(validatingUTF8: publicKey)!, String(validatingUTF8: secretKey)!)
+}

@@ -1,4 +1,4 @@
-// ZMQTests.swift
+// Error.swift
 //
 // The MIT License (MIT)
 //
@@ -22,31 +22,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import XCTest
-import SwiftZMQ
+import CZeroMQ
 
-class ZMQTests: XCTestCase {
-    func testExample() {
-        var called = false
-        do {
-            let context = try Context()
+public struct Error : ErrorProtocol, CustomStringConvertible {
+    public let description: String
 
-            let inbound = try context.socket(.Pull)
-            try inbound.bind("tcp://127.0.0.1:5555")
-
-            let outbound = try context.socket(.Push)
-            try outbound.connect("tcp://127.0.0.1:5555")
-
-            try outbound.sendString("Hello World!")
-            try outbound.sendString("Bye!")
-
-            while let data = try inbound.receiveString() where data != "Bye!" {
-                called = true
-                XCTAssert(data == "Hello World!")
-            }
-        } catch {
-            XCTAssert(false)
-        }
-        XCTAssert(called)
+    static var lastError: Error {
+        let description = String(validatingUTF8: zmq_strerror(zmq_errno()))!
+        return Error(description: description)
     }
 }

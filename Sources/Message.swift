@@ -22,7 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import ZeroMQ
+import CZeroMQ
 
 public final class Message {
     var message: zmq_msg_t
@@ -43,7 +43,7 @@ public final class Message {
         }
     }
 
-    public init(data: UnsafeMutablePointer<Void>, size: Int, hint: UnsafeMutablePointer<Void> = nil, ffn: @convention(c) (UnsafeMutablePointer<Void>, UnsafeMutablePointer<Void>) -> Void) throws {
+    public init(data: UnsafeMutablePointer<Void>, size: Int, hint: UnsafeMutablePointer<Void>? = nil, ffn: @convention(c) (UnsafeMutablePointer<Void>?, UnsafeMutablePointer<Void>?) -> Void) throws {
         message = zmq_msg_t()
 
         if zmq_msg_init_data(&message, data, size, ffn, hint) == -1 {
@@ -63,22 +63,20 @@ public final class Message {
         zmq_msg_close(&message)
     }
 
-    func setProperty(property: Int32, value: Int32) {
+    func setProperty(_ property: Int32, value: Int32) {
         zmq_msg_set(&message, property, value)
     }
 
-    func getProperty(property: Int32) -> Int32 {
+    func getProperty(_ property: Int32) -> Int32 {
         return zmq_msg_get(&message, property)
     }
 
-    public func getProperty(property: String) throws -> String {
-        let result = zmq_msg_gets(&message, property)
-
-        if result == nil {
+    public func getProperty(_ property: String) throws -> String {
+        guard let result = zmq_msg_gets(&message, property) else {
             throw Error.lastError
         }
 
-        return String.fromCString(result)!
+        return String(validatingUTF8: result)!
     }
 
     public func close() throws {
@@ -109,7 +107,7 @@ public final class Message {
         return message
     }
 
-    public func move(inout message: Message) throws {
+    public func move(_ message: inout Message) throws {
         let message = try Message()
 
         if zmq_msg_move(&message.message, &self.message) == -1 {

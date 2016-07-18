@@ -22,9 +22,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import ZeroMQ
+import CZeroMQ
 
-public struct PollEvent : OptionSetType {
+public struct PollEvent : OptionSet {
     public let rawValue: Int16
 
     public init(rawValue: Int16) {
@@ -34,7 +34,7 @@ public struct PollEvent : OptionSetType {
     public static let In       = PollEvent(rawValue: Int16(ZMQ_POLLIN))
     public static let Out      = PollEvent(rawValue: Int16(ZMQ_POLLOUT))
     public static let Error    = PollEvent(rawValue: Int16(ZMQ_POLLERR))
-    public static let Priority = PollEvent(rawValue: Int16(ZMQ_POLLPRI))
+    // public static let Priority = PollEvent(rawValue: Int16(ZMQ_POLLPRI))
 }
 
 public enum PollItemEvent {
@@ -65,7 +65,7 @@ public enum PollItemEvent {
     }
 }
 
-public func poll(items: PollItemEvent..., timeout: Int) throws -> [PollItemEvent] {
+public func poll(_ items: PollItemEvent..., timeout: Int) throws -> [PollItemEvent] {
     var pollItems = items.map { $0.pollItem }
 
     if zmq_poll(&pollItems, Int32(pollItems.count), timeout) == -1 {

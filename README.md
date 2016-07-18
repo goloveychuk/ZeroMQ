@@ -1,124 +1,90 @@
-SwiftZMQ
-========
+# ZeroMQ
 
-[![Swift 2.1](https://img.shields.io/badge/Swift-2.1-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![Platforms OS X](https://img.shields.io/badge/Platforms-OS%20X-lightgray.svg?style=flat)](https://developer.apple.com/swift/)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-Compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![License MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://tldrlegal.com/license/mit-license)
-[![Travis](https://img.shields.io/badge/Build-Passing-4BC51D.svg?style=flat)](https://travis-ci.org/Zewo/SwiftZMQ)
-[![codecov.io](http://codecov.io/github/Zewo/SwiftZMQ/coverage.svg?branch=master)](http://codecov.io/github/Zewo/SwiftZMQ?branch=master)
-[![Slack Status](https://zewo-slackin.herokuapp.com/badge.svg)](https://zewo-slackin.herokuapp.com)
+[![Swift][swift-badge]][swift-url]
+[![Zewo][zewo-badge]][zewo-url]
+[![Platform][platform-badge]][platform-url]
+[![License][mit-badge]][mit-url]
+[![Slack][slack-badge]][slack-url]
+[![Travis][travis-badge]][travis-url]
+[![Codebeat][codebeat-badge]][codebeat-url]
 
-**SwiftZMQ** is a [ZeroMQ](http://zeromq.org/) binding for **Swift 2**.
+**ZeroMQ** is a [0mq](http://zeromq.org/) binding for **Swift 3**.
 
 ## Features
 
-- [x] No `Foundation` dependency (**Linux ready**)
 - [x] Context
 - [x] Socket
 - [x] Message
 - [x] Poller
 - [x] Proxy
 
-This fork clones the libzmq repo and compiles it statically into the SwiftZMQ framework, also it adds the iOS framework target
-
 ##Example
 
 ```swift
-import SwiftZMQ
+import ZeroMQ
 
-do {
-    let context = try Context()
+let context = try Context()
 
-    let inbound = try context.socket(.Pull)
-    try inbound.bind("tcp://127.0.0.1:5555")
+let inbound = try context.socket(.Pull)
+try inbound.bind("tcp://127.0.0.1:5555")
 
-    let outbound = try context.socket(.Push)
-    try outbound.connect("tcp://127.0.0.1:5555")
+let outbound = try context.socket(.Push)
+try outbound.connect("tcp://127.0.0.1:5555")
 
-    try outbound.sendString("Hello World!")
-    try outbound.sendString("Bye!")
+try outbound.sendString("Hello World!")
+try outbound.sendString("Bye!")
 
-    while let data = try inbound.receiveString() where data != "Bye!" {
-        print(data) // "Hello World!"
-    }
-} catch {
-    // Something bad happened :(
+while let data = try inbound.receiveString() where data != "Bye!" {
+    print(data) // "Hello World!"
 }
-```
-
-## Dependency
-
-**SwiftZMQ** requires ZeroMQ version 4.2 to be installed. The easiest way on Mac OS X is through brew.
-
-```
-> brew install zeromq --with-libsodium --HEAD
 ```
 
 ## Installation
 
-### Carthage
+Install ZeroMQ system library
 
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
-
-You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
-
-```bash
-$ brew update
-$ brew install carthage
+```sh
+./setup_env.sh
 ```
 
-To integrate **SwiftZMQ** into your Xcode project using Carthage, specify it in your `Cartfile`:
+Add `ZeroMQ` to `Package.swift`
 
-```ogdl
-github "Zewo/SwiftZMQ"
+```swift
+import PackageDescription
+
+let package = Package(
+    dependencies: [
+        .Package(url: "https://github.com/Zewo/ZeroMQ.git", majorVersion: 0, minor: 5),
+    ]
+)
 ```
 
-### Manually
+## Support
 
-If you prefer not to use a dependency manager, you can integrate **SwiftZMQ** into your project manually.
-
-#### Embedded Framework
-
-- Open up Terminal, `cd` into your top-level project directory, and run the following command "if" your project is not initialized as a git repository:
-
-```bash
-$ git init
-```
-
-- Add **SwiftZMQ** as a git [submodule](http://git-scm.com/docs/git-submodule) by running the following command:
-
-```bash
-$ git submodule add https://github.com/Zewo/SwiftZMQ.git
-```
-
-- Open the new `SwiftZMQ` folder, and drag the `SwiftZMQ.xcodeproj` into the Project Navigator of your application's Xcode project.
-
-    > It should appear nested underneath your application's blue project icon. Whether it is above or below all the other Xcode groups does not matter.
-
-- Select the `SwiftZMQ.xcodeproj` in the Project Navigator and verify the deployment target matches that of your application target.
-- Next, select your application project in the Project Navigator (blue project icon) to navigate to the target configuration window and select the application target under the "Targets" heading in the sidebar.
-- In the tab bar at the top of that window, open the "General" panel.
-- Click on the `+` button under the "Embedded Binaries" section.
-- You will see two different `SwiftZMQ.xcodeproj` folders each with two different versions of the `SwiftZMQ.framework` nested inside a `Products` folder.
-
-    > It does not matter which `Products` folder you choose from, but it does matter whether you choose the top or bottom `SwiftZMQ.framework`.
-
-- Select the top `SwiftZMQ.framework` for OS X and the bottom one for iOS.
-
-    > You can verify which one you selected by inspecting the build log for your project. The build target for `SwiftZMQ` will be listed as either `SwiftZMQ iOS` or `SwiftZMQ OSX`.
-
-- And that's it!
-
-> The `SwiftZMQ.framework` is automagically added as a target dependency, linked framework and embedded framework in a copy files build phase which is all you need to build on the simulator and a device.
+If you need any help you can join our [Slack](http://slack.zewo.io) and go to the **#help** channel. Or you can create a Github [issue](https://github.com/Zewo/Zewo/issues/new) in our main repository. When stating your issue be sure to add enough details, specify what module is causing the problem and reproduction steps.
 
 ## Community
 
-[![Slack](http://s13.postimg.org/ybwy92ktf/Slack.png)](https://zewo-slackin.herokuapp.com)
+[![Slack][slack-image]][slack-url]
 
-Join us on [Slack](https://zewo-slackin.herokuapp.com).
+The entire Zewo code base is licensed under MIT. By contributing to Zewo you are contributing to an open and engaged community of brilliant Swift programmers. Join us on [Slack](http://slack.zewo.io) to get to know us!
 
-License
--------
+## License
 
-**SwiftZMQ** is released under the MIT license. See LICENSE for details.
+This project is released under the MIT license. See [LICENSE](LICENSE) for details.
+
+[swift-badge]: https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat
+[swift-url]: https://swift.org
+[zewo-badge]: https://img.shields.io/badge/Zewo-0.5-FF7565.svg?style=flat
+[zewo-url]: http://zewo.io
+[platform-badge]: https://img.shields.io/badge/Platforms-OS%20X%20--%20Linux-lightgray.svg?style=flat
+[platform-url]: https://swift.org
+[mit-badge]: https://img.shields.io/badge/License-MIT-blue.svg?style=flat
+[mit-url]: https://tldrlegal.com/license/mit-license
+[slack-image]: http://s13.postimg.org/ybwy92ktf/Slack.png
+[slack-badge]: https://zewo-slackin.herokuapp.com/badge.svg
+[slack-url]: http://slack.zewo.io
+[travis-badge]: https://travis-ci.org/Zewo/ZeroMQ.svg?branch=master
+[travis-url]: https://travis-ci.org/Zewo/ZeroMQ
+[codebeat-badge]: https://codebeat.co/badges/baad8b1a-7649-496b-b224-ce59b33a1717
+[codebeat-url]: https://codebeat.co/projects/github-com-zewo-zeromq

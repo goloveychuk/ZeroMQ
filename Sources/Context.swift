@@ -22,7 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import ZeroMQ
+import CZeroMQ
 
 public enum SocketType {
     case Req
@@ -37,8 +37,8 @@ public enum SocketType {
     case Pull
     case Pair
     case Stream
-    case Server
-    case Client
+    // case Server
+    // case Client
 }
 
 extension SocketType {
@@ -56,8 +56,8 @@ extension SocketType {
         case ZMQ_PULL:   self = Pull
         case ZMQ_PAIR:   self = Pair
         case ZMQ_STREAM: self = Stream
-        case ZMQ_SERVER: self = Server
-        case ZMQ_CLIENT: self = Client
+        // case ZMQ_SERVER: self = Server
+        // case ZMQ_CLIENT: self = Client
 
         default:         return nil
         }
@@ -79,14 +79,14 @@ extension SocketType {
         case .Pull: return ZMQ_PULL
         case .Pair: return ZMQ_PAIR
         case .Stream: return ZMQ_STREAM
-        case .Server: return ZMQ_SERVER
-        case .Client: return ZMQ_CLIENT
+        // case .Server: return ZMQ_SERVER
+        // case .Client: return ZMQ_CLIENT
         }
     }
 }
 
 public final class Context {
-    let context: UnsafeMutablePointer<Void>
+    let context: UnsafeMutablePointer<Void>?
 
     public init() throws {
         context = zmq_ctx_new()
@@ -116,18 +116,17 @@ public final class Context {
         }
     }
 
-    func setOption(option: Int32, value: Int32) {
+    func setOption(_ option: Int32, value: Int32) {
         zmq_ctx_set(context, option, value)
     }
 
-    func getOption(option: Int32) -> Int32 {
+    func getOption(_ option: Int32) -> Int32 {
         return zmq_ctx_get(context, option)
     }
 
-    public func socket(type: SocketType) throws -> Socket {
-        let socket = zmq_socket(context, type.rawValue)
+    public func socket(_ type: SocketType) throws -> Socket {
 
-        if socket == nil {
+        guard let socket = zmq_socket(context, type.rawValue) else {
             throw Error.lastError
         }
 
@@ -136,14 +135,14 @@ public final class Context {
 }
 
 extension Context {
-    public var blocky: Bool {
-        set {
-            setOption(ZMQ_BLOCKY, value: newValue ? 1 : 0)
-        }
-        get {
-            return getOption(ZMQ_BLOCKY) != 0
-        }
-    }
+    // public var blocky: Bool {
+    //     set {
+    //         setOption(ZMQ_BLOCKY, value: newValue ? 1 : 0)
+    //     }
+    //     get {
+    //         return getOption(ZMQ_BLOCKY) != 0
+    //     }
+    // }
 
     public var IOThreads: Int32 {
         set {
@@ -176,11 +175,11 @@ extension Context {
         return getOption(ZMQ_SOCKET_LIMIT)
     }
 
-    public func setThreadSchedulingPolicy(value: Int32) {
+    public func setThreadSchedulingPolicy(_ value: Int32) {
         setOption(ZMQ_THREAD_SCHED_POLICY, value: value)
     }
 
-    public func setThreadPriority(value: Int32) {
+    public func setThreadPriority(_ value: Int32) {
         setOption(ZMQ_THREAD_PRIORITY, value: value)
     }
 }
