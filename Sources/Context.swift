@@ -44,18 +44,18 @@ public enum SocketType {
 extension SocketType {
     init?(rawValue: Int32) {
         switch rawValue {
-        case ZMQ_REQ:    self = Req
-        case ZMQ_REP:    self = Rep
-        case ZMQ_DEALER: self = Dealer
-        case ZMQ_ROUTER: self = Router
-        case ZMQ_PUB:    self = Pub
-        case ZMQ_SUB:    self = Sub
-        case ZMQ_XPUB:   self = XPub
-        case ZMQ_XSUB:   self = XSub
-        case ZMQ_PUSH:   self = Push
-        case ZMQ_PULL:   self = Pull
-        case ZMQ_PAIR:   self = Pair
-        case ZMQ_STREAM: self = Stream
+        case ZMQ_REQ:    self = .Req
+        case ZMQ_REP:    self = .Rep
+        case ZMQ_DEALER: self = .Dealer
+        case ZMQ_ROUTER: self = .Router
+        case ZMQ_PUB:    self = .Pub
+        case ZMQ_SUB:    self = .Sub
+        case ZMQ_XPUB:   self = .XPub
+        case ZMQ_XSUB:   self = .XSub
+        case ZMQ_PUSH:   self = .Push
+        case ZMQ_PULL:   self = .Pull
+        case ZMQ_PAIR:   self = .Pair
+        case ZMQ_STREAM: self = .Stream
         // case ZMQ_SERVER: self = Server
         // case ZMQ_CLIENT: self = Client
 

@@ -680,9 +680,9 @@ public enum SecurityMechanism {
 extension SecurityMechanism {
     init?(rawValue: Int32) {
         switch rawValue {
-        case ZMQ_NULL: self = Null
-        case ZMQ_PLAIN: self = Plain
-        case ZMQ_CURVE: self = CURVE
+        case ZMQ_NULL: self = .Null
+        case ZMQ_PLAIN: self = .Plain
+        case ZMQ_CURVE: self = .CURVE
         default: return nil
         }
     }

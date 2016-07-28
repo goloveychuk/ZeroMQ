@@ -24,7 +24,7 @@
 
 import CZeroMQ
 
-public struct Error : ErrorProtocol, CustomStringConvertible {
+public struct Error : Swift.Error, CustomStringConvertible {
     public let description: String
 
     static var lastError: Error {
