@@ -47,9 +47,9 @@ public struct ReceiveMode : OptionSet {
 }
 
 public final class Socket {
-    let socket: UnsafeMutablePointer<Void>
+    let socket: UnsafeMutableRawPointer
 
-    init(socket: UnsafeMutablePointer<Void>) {
+    init(socket: UnsafeMutableRawPointer) {
         self.socket = socket
     }
 

@@ -38,7 +38,7 @@ public struct PollEvent : OptionSet {
 }
 
 public enum PollItemEvent {
-    case Socket(socket: UnsafeMutablePointer<Void>, events: PollEvent)
+    case Socket(socket: UnsafeMutableRawPointer, events: PollEvent)
     case FileDescriptor(fileDescriptor: Int32, events: PollEvent)
 
     var pollItem: zmq_pollitem_t {

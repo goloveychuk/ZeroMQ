@@ -86,7 +86,7 @@ extension SocketType {
 }
 
 public final class Context {
-    let context: UnsafeMutablePointer<Void>?
+    let context: UnsafeMutableRawPointer?
 
     public init() throws {
         context = zmq_ctx_new()
