@@ -43,7 +43,7 @@ public final class Message {
         }
     }
 
-    public init(data: UnsafeMutablePointer<Void>, size: Int, hint: UnsafeMutablePointer<Void>? = nil, ffn: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void) throws {
+    public init(data: UnsafeMutableRawPointer, size: Int, hint: UnsafeMutableRawPointer? = nil, ffn: @escaping @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void) throws {
         message = zmq_msg_t()
 
         if zmq_msg_init_data(&message, data, size, ffn, hint) == -1 {
@@ -51,7 +51,7 @@ public final class Message {
         }
     }
 
-    public init(data: UnsafeMutablePointer<Void>, size: Int) throws {
+    public init(data: UnsafeMutableRawPointer, size: Int) throws {
         message = zmq_msg_t()
 
         if zmq_msg_init_data(&message, data, size, nil, nil) == -1 {
