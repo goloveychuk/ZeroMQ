@@ -29,7 +29,7 @@ public func CURVEKeyPair() throws -> (publicKey: String, secretKey: String) {
     var secretKey = [Int8](repeating: 0, count: 41)
 
     if zmq_curve_keypair(&publicKey, &secretKey) == -1 {
-        throw Error.lastError
+        throw ZeroMqError.lastError
     }
 
     return (String(validatingUTF8: publicKey)!, String(validatingUTF8: secretKey)!)

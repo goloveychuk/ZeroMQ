@@ -25,18 +25,18 @@
 import CZeroMQ
 
 public enum SocketType {
-    case Req
-    case Rep
-    case Dealer
-    case Router
-    case Pub
-    case Sub
-    case XPub
-    case XSub
-    case Push
-    case Pull
-    case Pair
-    case Stream
+    case req
+    case rep
+    case dealer
+    case router
+    case pub
+    case sub
+    case xPub
+    case xSub
+    case push
+    case pull
+    case pair
+    case stream
     // case Server
     // case Client
 }
@@ -44,18 +44,18 @@ public enum SocketType {
 extension SocketType {
     init?(rawValue: Int32) {
         switch rawValue {
-        case ZMQ_REQ:    self = Req
-        case ZMQ_REP:    self = Rep
-        case ZMQ_DEALER: self = Dealer
-        case ZMQ_ROUTER: self = Router
-        case ZMQ_PUB:    self = Pub
-        case ZMQ_SUB:    self = Sub
-        case ZMQ_XPUB:   self = XPub
-        case ZMQ_XSUB:   self = XSub
-        case ZMQ_PUSH:   self = Push
-        case ZMQ_PULL:   self = Pull
-        case ZMQ_PAIR:   self = Pair
-        case ZMQ_STREAM: self = Stream
+        case ZMQ_REQ:    self = .req
+        case ZMQ_REP:    self = .rep
+        case ZMQ_DEALER: self = .dealer
+        case ZMQ_ROUTER: self = .router
+        case ZMQ_PUB:    self = .pub
+        case ZMQ_SUB:    self = .sub
+        case ZMQ_XPUB:   self = .xPub
+        case ZMQ_XSUB:   self = .xSub
+        case ZMQ_PUSH:   self = .push
+        case ZMQ_PULL:   self = .pull
+        case ZMQ_PAIR:   self = .pair
+        case ZMQ_STREAM: self = .stream
         // case ZMQ_SERVER: self = Server
         // case ZMQ_CLIENT: self = Client
 
@@ -67,18 +67,18 @@ extension SocketType {
 extension SocketType {
     var rawValue: Int32 {
         switch self {
-        case .Req: return ZMQ_REQ
-        case .Rep: return ZMQ_REP
-        case .Dealer: return ZMQ_DEALER
-        case .Router: return ZMQ_ROUTER
-        case .Pub: return ZMQ_PUB
-        case .Sub: return ZMQ_SUB
-        case .XPub: return ZMQ_XPUB
-        case .XSub: return ZMQ_XSUB
-        case .Push: return ZMQ_PUSH
-        case .Pull: return ZMQ_PULL
-        case .Pair: return ZMQ_PAIR
-        case .Stream: return ZMQ_STREAM
+        case .req: return ZMQ_REQ
+        case .rep: return ZMQ_REP
+        case .dealer: return ZMQ_DEALER
+        case .router: return ZMQ_ROUTER
+        case .pub: return ZMQ_PUB
+        case .sub: return ZMQ_SUB
+        case .xPub: return ZMQ_XPUB
+        case .xSub: return ZMQ_XSUB
+        case .push: return ZMQ_PUSH
+        case .pull: return ZMQ_PULL
+        case .pair: return ZMQ_PAIR
+        case .stream: return ZMQ_STREAM
         // case .Server: return ZMQ_SERVER
         // case .Client: return ZMQ_CLIENT
         }
@@ -86,13 +86,13 @@ extension SocketType {
 }
 
 public final class Context {
-    let context: UnsafeMutablePointer<Void>?
+    let context: UnsafeMutableRawPointer?
 
     public init() throws {
         context = zmq_ctx_new()
 
         if context == nil {
-            throw Error.lastError
+            throw ZeroMqError.lastError
         }
     }
 
@@ -100,7 +100,7 @@ public final class Context {
         context = zmq_ctx_new()
 
         if context == nil {
-            throw Error.lastError
+            throw ZeroMqError.lastError
         }
 
         self.IOThreads = IOThreads
@@ -112,7 +112,7 @@ public final class Context {
 
     public func terminate() throws {
         if zmq_ctx_term(context) == -1 {
-            throw Error.lastError
+            throw ZeroMqError.lastError
         }
     }
 
@@ -127,7 +127,7 @@ public final class Context {
     public func socket(_ type: SocketType) throws -> Socket {
 
         guard let socket = zmq_socket(context, type.rawValue) else {
-            throw Error.lastError
+            throw ZeroMqError.lastError
         }
 
         return Socket(socket: socket)

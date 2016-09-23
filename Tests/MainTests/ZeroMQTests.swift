@@ -16,7 +16,7 @@ class ZeroMQTests: XCTestCase {
             try outbound.sendString("Hello World!")
             try outbound.sendString("Bye!")
 
-            while let data = try inbound.receiveString() where data != "Bye!" {
+            while let data = try inbound.receiveString() , data != "Bye!" {
                 called = true
                 XCTAssert(data == "Hello World!")
             }
@@ -28,7 +28,7 @@ class ZeroMQTests: XCTestCase {
 }
 
 extension ZeroMQTests {
-    static var allTests: [(String, ZeroMQTests -> () throws -> Void)] {
+    static var allTests: [(String, (ZeroMQTests) -> () throws -> Void)] {
         return [
            ("testPushPull", testPushPull),
         ]

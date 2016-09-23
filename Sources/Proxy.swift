@@ -24,6 +24,6 @@
 
 import CZeroMQ
 
-public func proxy(frontend: Socket, backend: Socket, capture: Socket? = nil) {
+public func proxy(_ frontend: Socket, backend: Socket, capture: Socket? = nil) {
     zmq_proxy(frontend.socket, backend.socket, capture?.socket ?? nil)
 }
