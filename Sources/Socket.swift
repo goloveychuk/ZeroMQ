@@ -197,11 +197,11 @@ public struct SocketEvent : OptionSet {
 extension Socket {
     func setOption(_ option: Int32, _ value: Bool) throws {
         var value = value ? 1 : 0
-        try setOption(option, value: &value, length: MemoryLayout<Int32>.stride)
+        try setOption(option, value: &value, length: MemoryLayout<Int32>.size)
     }
     func setOption(_ option: Int32, _ value: Int32) throws {
         var value = value
-        try setOption(option, value: &value, length: MemoryLayout<Int32>.stride)
+        try setOption(option, value: &value, length: MemoryLayout<Int32>.size)
     }
     func setOption(_ option: Int32, _ value: String) throws {
         try value.withCString { v in
@@ -227,7 +227,7 @@ extension Socket {
 extension Socket {
     public func setAffinity(_ value: UInt64) throws {
         var value = value
-        try setOption(ZMQ_AFFINITY, value: &value, length: MemoryLayout<UInt64>.stride)
+        try setOption(ZMQ_AFFINITY, value: &value, length: MemoryLayout<UInt64>.size)
     }
 
     public func setBacklog(_ value: Int32) throws {
@@ -316,7 +316,7 @@ extension Socket {
 
     public func setMaxMessageSize(_ value: Int64) throws {
         var value = value
-        try setOption(ZMQ_MAXMSGSIZE, value: &value, length: MemoryLayout<Int64>.stride)
+        try setOption(ZMQ_MAXMSGSIZE, value: &value, length: MemoryLayout<Int64>.size)
     }
 
     public func setMulticastHops(_ value: Int32) throws {
@@ -463,7 +463,7 @@ extension Socket {
 extension Socket {
     func getOption(_ option: Int32) throws -> Int32 {
         var value: Int32 = 0
-        var length = MemoryLayout<Int32>.stride
+        var length = MemoryLayout<Int32>.size
         try getOption(option, value: &value, length: &length)
         return value
     }
@@ -482,7 +482,7 @@ extension Socket {
 extension Socket {
     public func getAffinity() throws -> UInt64 {
         var value: UInt64 = 0
-        var length = MemoryLayout<UInt64>.stride
+        var length = MemoryLayout<UInt64>.size
         try getOption(ZMQ_AFFINITY, value: &value, length: &length)
         return value
     }
@@ -566,7 +566,7 @@ extension Socket {
 
     public func getMaxMessageSize() throws -> Int64 {
         var value: Int64 = 0
-        var length = MemoryLayout<Int64>.stride
+        var length = MemoryLayout<Int64>.size
         try getOption(ZMQ_MAXMSGSIZE, value: &value, length: &length)
         return value
     }
@@ -695,11 +695,11 @@ extension SecurityMechanism {
 }
 
 extension Socket {
-    public func sendString(_ string: String, mode: SendMode = []) throws -> Bool {
+    public func send(_ string: String, mode: SendMode = []) throws -> Bool {
         return try send(Data(string.utf8), mode: mode)
     }
 
-    public func receiveString(_ mode: ReceiveMode = []) throws -> String? {
+    public func receive(_ mode: ReceiveMode = []) throws -> String? {
         guard let buffer = try receive(mode: mode) else {
             return nil
         }
