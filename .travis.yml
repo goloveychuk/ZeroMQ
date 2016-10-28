@@ -8,7 +8,8 @@ sudo: required
 dist: trusty
 osx_image: xcode8
 install:
-  - eval "$(curl -sL https://raw.githubusercontent.com/Zewo/Zewo/master/Scripts/install-swift.sh)"
+  - eval "$(curl -sL https://raw.githubusercontent.com/Zewo/Zewo/master/Scripts/Travis/install.sh)"
+
 script:
   - swift build --fetch # clones all dependencies
   - rm -rf Packages/*/Tests # deletes dependency's tests until duplicate Package.tests issue can be resolved in SPM. At that point, remove.
